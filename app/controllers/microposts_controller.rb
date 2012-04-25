@@ -9,9 +9,9 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(params[:micropost])
     if @micropost.save
       @micropost.content.scan(/"([^"]*)"/)  { |u| 
-        @user = User.find_by_name(u)
-        
-        UserMailer.mentioned_email(@user, current_user).deliver
+         if @user = User.find_by_name(u)
+           UserMailer.mentioned_email(@user, current_user).deliver
+         end
       }
             
       flash[:success] = "Micropost created!"
