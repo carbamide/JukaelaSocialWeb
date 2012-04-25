@@ -3,7 +3,11 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:relationship][:followed_id])
+        
     current_user.follow!(@user)
+    
+    UserMailer.following_email(current_user, @user).deliver
+    
     redirect_to @user
   end
 
