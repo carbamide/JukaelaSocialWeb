@@ -4,14 +4,13 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Welcome to Jukaela, <%= @user.name %></h1>
+    <h1>You have been mentioned on Jukaela, <%= @user.name %>!</h1>
     <p>
-      You have successfully signed up to Jukaela,
-      your username is: <%= @user.email %>.<br/>
+	  <%= @mentioning_user.name %> mentioned you in a post!
     </p>
     <p>
       To login to the site, just follow this link: <%= @url %>.
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <p>Thanks for being apart of the greatest social network known to man!</p>
   </body>
 </html>

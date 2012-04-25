@@ -8,6 +8,12 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(params[:micropost])
     if @micropost.save
+      @micropost.content.scan(/"([^"]*)"/)  { |u| 
+        @user = User.find_by_name(u)
+        
+        UserMailer.mentioned_email(@user, current_user).deliver
+      }
+            
       flash[:success] = "Micropost created!"
       redirect_to root_path
     else
