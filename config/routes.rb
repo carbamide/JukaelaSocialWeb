@@ -15,6 +15,7 @@ Base64App::Application.routes.draw do
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/contact', :to => 'pages#contact'
+  match '/news', :to => 'pages#news'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
 
