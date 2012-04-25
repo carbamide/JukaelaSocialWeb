@@ -1,0 +1,4 @@
+2012/04/24 23:29:37 [error] 48440#0: *4 "/Users/jbarrow/rails_projects/micropost/app/views/user_mailer/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "HEAD / HTTP/1.1", host: "0.0.0.0"
+2012/04/24 23:29:41 [error] 48440#0: *5 "/Users/jbarrow/rails_projects/micropost/app/views/user_mailer/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "GET / HTTP/1.1", host: "localhost:3000"
+2012/04/24 23:33:59 [error] 48654#0: *4 "/Users/jbarrow/rails_projects/micropost/app/views/user_mailer/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "HEAD / HTTP/1.1", host: "0.0.0.0"
+2012/04/24 23:34:03 [error] 48654#0: *5 "/Users/jbarrow/rails_projects/micropost/app/views/user_mailer/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "GET / HTTP/1.1", host: "localhost:3000"

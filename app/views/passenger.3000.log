@@ -1,0 +1,2 @@
+2012/04/24 23:11:13 [error] 47871#0: *4 "/Users/jbarrow/rails_projects/micropost/app/views/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "HEAD / HTTP/1.1", host: "0.0.0.0"
+2012/04/24 23:11:20 [error] 47871#0: *5 "/Users/jbarrow/rails_projects/micropost/app/views/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "GET / HTTP/1.1", host: "localhost:3000"
