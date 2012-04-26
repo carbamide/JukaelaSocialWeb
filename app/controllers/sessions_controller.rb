@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
   end
 
   def create
+    session[:staysignedin] = (params[:session][:stay_signed_in] == "1") ? true : false
+    
     user = User.authenticate(params[:session][:email], params[:session][:password])
 
     if user.nil?
