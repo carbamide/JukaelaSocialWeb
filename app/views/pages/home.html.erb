@@ -13,10 +13,26 @@
     </tr>
   </table>
 <% else %>
-  <h1>Welcome to Jukaela.</h1>
-  <p>
-	Find out what's happening with all your friends!
-  </p>
-
-  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+  <h1>Welcome to Jukaela.</h1><br />
+	<h3>Not another social network</h3>
+	<p>You're sick of Twitter and Facebook and MyBook and FaceSpace, so the logical thing to do is... <i>join another social network</i>!  Do it now!  You know you want to!  All the cool kids are doing it!</p>
+<table>
+	<tr>
+		<td><h2><center>Not a member?</center></h2>
+		<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %></td>
+		<td><br /><h2><center>Already a member?</center></h2>
+		<center><%= form_for(:session, :url => sessions_path) do |f| %>
+		  <div class="field">
+		    <%= f.text_field :email, :placeholder => "Email" %>
+		  </div>
+		  <div class="field">
+		    <%= f.password_field :password, :placeholder => "Password" %>
+		  </div>
+		  <div class="actions">
+		    <%= f.submit "Sign in" %>
+		  </div>
+		<% end %></center></td>
+	</tr>
+</table>
+		
 <% end %>
