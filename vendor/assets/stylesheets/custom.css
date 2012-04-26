@@ -81,8 +81,14 @@ a.signup_button {
   text-align: center;
   width: 190px;
   color: #fff;
-  background: #006400;
-  font-size: 150%;
+background: rgb(206,220,231); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(206,220,231,1) 0%, rgba(89,106,114,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(206,220,231,1)), color-stop(100%,rgba(89,106,114,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(206,220,231,1) 0%,rgba(89,106,114,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(206,220,231,1) 0%,rgba(89,106,114,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(206,220,231,1) 0%,rgba(89,106,114,1) 100%); /* IE10+ */
+background: linear-gradient(top, rgba(206,220,231,1) 0%,rgba(89,106,114,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72',GradientType=0 ); /* IE6-9 */  font-size: 150%;
   font-weight: bold;
   padding: 20px;
 }
@@ -121,6 +127,20 @@ td.sidebar {
 	padding: 1em;
 	vertical-align: top;
 	background: #ffc;
+}
+
+td.signup {
+	width: 30%;
+	padding: 1em;
+	vertical-align: top;
+	background: #808080;
+}
+
+td.signin {
+	width: 30%;
+	padding: 1em;
+	vertical-align: top;
+	background: #808080;
 }
 
 .profile img.gravatar {
