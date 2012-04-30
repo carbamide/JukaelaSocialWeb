@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/rails/prototype_legacy_helper.git
+  revision: a2cd95c3e3c1a4f7a9566efdab5ce59c886cb05f
+  specs:
+    prototype_legacy_helper (0.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -139,6 +145,7 @@ DEPENDENCIES
   jquery-rails (= 2.0.0)
   json
   pg
+  prototype_legacy_helper (= 0.0.0)!
   rails (= 3.2.3)
   rspec-rails (= 2.6.1)
   sass-rails (~> 3.2.3)

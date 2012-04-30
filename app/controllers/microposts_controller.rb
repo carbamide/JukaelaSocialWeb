@@ -22,6 +22,23 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def repost_post(post)
+    @micropost = post
+    if @micropost.save
+      @micropost.content.scan(/"([^"]*)"/)  { |u| 
+         if @user = User.find_by_name(u)
+           UserMailer.mentioned_email(@user, current_user).deliver
+         end
+      }
+            
+      flash[:success] = "Micropost created!"
+      redirect_to root_path
+    else
+      @feed_items = []
+      render 'pages/home'
+    end
+  end
+
   def destroy
     @micropost.destroy
     redirect_back_or root_path
