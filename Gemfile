@@ -10,6 +10,7 @@ gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototyp
 
 group :production do
   gem 'pg'
+  gem 'rack-google_analytics', :require => "rack/google_analytics"
 end
 
 group :development do
