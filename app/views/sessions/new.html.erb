@@ -11,6 +11,8 @@
       <%= f.label :password %>
       <%= f.password_field :password %>
 
+	  <%= f.check_box :stay_signed_in %> Stay signed in?
+	  <br /><br />
       <%= f.submit "Sign in", :class => "btn btn-large btn-primary" %>
     <% end %>
 
