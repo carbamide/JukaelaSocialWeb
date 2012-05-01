@@ -4,8 +4,16 @@
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
   </span>
   <% if current_user?(micropost.user) %>
-    <%= link_to "delete", micropost, :method =>  :delete,
-                                     :confirm => "You sure?",
-                                     :title =>   micropost.content %>
-  <% end %>
+	<div class="btn-group">
+  		<button class="btn">Action</button>
+  		<button class="btn dropdown-toggle" data-toggle="dropdown">
+    		<span class="caret"></span>
+  		</button>
+  		<ul class="dropdown-menu">
+    		<%= link_to "delete", micropost, :method =>  :delete,
+		                                     :confirm => "You sure?",
+		                                     :title =>   micropost.content %>
+  		</ul>
+</div>
+<% end %>
 </li>
