@@ -18,6 +18,9 @@
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
+	  <%= f.label :profile, "Profile" %>
+	  <%= f.text_area :profile, :cols => "10", :rows => "8" %>
+	
       <%= f.submit "Save changes", :class => "btn btn-large btn-primary" %>
     <% end %>
 

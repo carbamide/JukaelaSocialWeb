@@ -7,6 +7,13 @@
       </h1>
     </section>
     <section>
+	  <% if @user.profile %>
+      	<%= auto_link(@user.profile) %>
+	  <% else %>
+		<div>User hasn't defined a profile.</div>
+	  <% end %>
+    </section>
+    <section>
       <%= render 'shared/stats' %>
     </section>
   </aside>

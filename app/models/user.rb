@@ -13,7 +13,7 @@ require 'digest'
 
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :profile
 
   has_many :microposts, :dependent => :destroy
   has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
   :confirmation => true,
   :length => { :within => 6..40 }
 
+  validates :profile, :length => { :maximum => 300 }
+  
   before_save :encrypt_password
 
   def has_password?(submitted_password)
