@@ -5,7 +5,8 @@ gem 'bootstrap-sass', '2.0.0'
 
 gem 'json'
 gem 'gravatar_image_tag', '1.0.0.pre2'
-gem 'will_paginate', '3.0'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 gem 'jquery-rails', '2.0.0'
 gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototype_legacy_helper.git'
 

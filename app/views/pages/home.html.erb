@@ -19,11 +19,48 @@
 <% else %>
 <div class="center hero-unit">
   <h1>Welcome to Jukaela Social</h1>
-
-  <h2>
-    Sign up.  <i>Now!</i>
-  </h2>
-
-  <%= link_to "Sign up now!", signup_path, :class => "btn btn-large btn-primary" %>
+<br />
+<div class="row">
+    <div class="span5">
+        <h2>The Question</h2>
+        <p>People come to us <i>all the time</i> saying, "I'm so sick of FaceSpace and Chipper.  What should I do?"  There are many things that I could tell you to do.  You could get a new dog.  You could learn to play an instrument, or you could continue reading this banter!</p><%= link_to "Sign up now!", signup_path, :class => "btn btn-large btn-primary" %>
+    </div>
+    <div class="span5">
+        <ul class="thumbnails">
+		  <li class="span5">
+		    <a href="#" class="thumbnail">
+		      <img src="assets/sadFace.jpg" alt="">
+		      <h5>Sad Person Is Sad</h5>
+		      <p>This person is sad because you don't use Jukaela Social</p>
+		    </a>
+		  </li>
+		</ul>
+    </div>
 </div>
+	<blockquote><p>This is probably the greatest website in the history of the world.  People in ancient times called, they said that they wish they had this social platform.</p><small>Ima Person, April 30th, 2012</small></blockquote>
+
+<div class="row">
+    <div class="span5">
+        <ul class="thumbnails">
+		  <li class="span5">
+		    <a href="#" class="thumbnail">
+		      <img src="assets/happyPerson.jpg" alt="">
+		      <h5>Wow!</h5>
+		      <p>This man might have started using Jukaela Social recently!</p>
+		    </a>
+		  </li>
+		</ul>
+    </div>
+    <div class="span5">
+        <h2>The Answer</h2>
+        <p>The answer is clear, my friends!  Sign up for a new social network.  Jukaela Social is nothing like the others!  Jukaela Social doesn't have fancy nonsense like <i>features</i>.  Jukaela Social is still in it's infancy.  It will probably lose all of your data, and it might even kick your dog!</p><%= link_to "Sign up now!", signup_path, :class => "btn btn-large btn-primary" %>
+    </div>
+</div>
+
+	<h2>Sign up now!</h2>
+	<p>Sign up for Jukaela Social today!  It's probably worth your effort, and it might not cause you to catch tuberculosis!</p>
+<%= link_to "Sign up now!", signup_path, :class => "btn btn-large btn-primary" %><br />
+
+</div>
+
 <% end %>

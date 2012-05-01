@@ -37,6 +37,8 @@ GEM
     annotate (2.4.0)
     arel (3.0.2)
     bootstrap-sass (2.0.0)
+    bootstrap-will_paginate (0.0.7)
+      will_paginate
     builder (3.0.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -142,6 +144,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.4.0)
   bootstrap-sass (= 2.0.0)
+  bootstrap-will_paginate
   coffee-rails (~> 3.2.1)
   factory_girl_rails (= 1.0)
   faker (= 0.3.1)
@@ -157,4 +160,4 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   webrat (= 0.7.1)
-  will_paginate (= 3.0)
+  will_paginate
