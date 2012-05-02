@@ -9,6 +9,9 @@
       <%= f.label :name %>
       <%= f.text_field :name %>
 
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+
       <%= f.label :email %>
       <%= f.email_field :email %>
 
@@ -20,10 +23,15 @@
 
 	  <%= f.label :profile, "Profile" %>
 	  <%= f.text_area :profile, :cols => "10", :rows => "8" %>
+	  <div class="well">
+	  <%= f.check_box :show_username, :class => "checkbox" %>	
+	  <%= f.label :show_username, "Show username on feed instead of real name" , :style => "display:inline" %>
+	  </div>
+	  <br />
 	
       <%= f.submit "Save changes", :class => "btn btn-large btn-primary" %>
     <% end %>
-
+	<br />
     <%= gravatar_for @user %>
     <a href="http://gravatar.com/emails">change</a>
   </div>

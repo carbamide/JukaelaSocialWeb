@@ -13,7 +13,7 @@ require 'digest'
 
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation, :profile
+  attr_accessible :name, :email, :password, :password_confirmation, :profile, :username, :show_username
 
   has_many :microposts, :dependent => :destroy
   has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
 
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-
+  username_regex = /^[a-z0-9\-_]+$/i
+  
   validates :name, :presence => true,
   :length   => { :maximum => 50 }
 
@@ -38,6 +39,11 @@ class User < ActiveRecord::Base
   :length => { :within => 6..40 }
 
   validates :profile, :length => { :maximum => 300 }
+  
+  validates :username, :presence => true,
+  :length => { :maximum => 15 },
+  :format => { :with => username_regex },
+  :uniqueness => { :case_sensitive => false }
   
   before_save :encrypt_password
 

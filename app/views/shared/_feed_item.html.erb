@@ -3,7 +3,15 @@
   <%= link_to gravatar_for(feed_item.user), feed_item.user %>	
 
   <span class="user">
-    <%= link_to feed_item.user.name, feed_item.user %>
+	<% if current_user.show_username == true %>
+			<% if feed_item.user.username %>
+				<%= link_to feed_item.user.username, feed_item.user %>
+			<% else %>
+				<%= link_to feed_item.user.name, feed_item.user %>
+		    <% end %>
+	<% else %>
+    	<%= link_to feed_item.user.name, feed_item.user %>
+	<% end %>
   </span>
   <span class="content"><%= auto_link(feed_item.content) %></span>
   <span class="timestamp">
@@ -75,6 +83,5 @@
 		<% end %>
 	  </div>
 	</div>
-	
 </li>
 

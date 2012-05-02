@@ -1,10 +1,22 @@
 <div class="row">
+	
   <aside class="span4">
     <section>
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+	  <h4>
+		<% if @user.username %>
+		<%= @user.username %>
+		<% else %>
+		<script type="text/javascript">
+		    $(window).load(function(){
+		        $('#no_user_name').modal('show');
+		    });
+		</script>
+		<% end %>
+	  </h4>
     </section>
     <section>
 	  <% if @user.profile %>
@@ -28,4 +40,17 @@
     <% end %>
   </div>
 </div>
+</div>
+
+<div class="modal fade" id="no_user_name" %>
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3>Specify User Name</h3>
+  </div>
+  <div class="modal-body">
+    <p>Jukaela Social now has usernames!  Holy cow!  You will now be redirected to your Profile page to specify one.</p>
+  </div>
+  <div class="modal-footer">
+    <%= link_to "Update", edit_user_path(current_user), :class => "btn btn-primary" %>
+  </div>
 </div>

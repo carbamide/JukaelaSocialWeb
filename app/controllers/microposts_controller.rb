@@ -13,7 +13,15 @@ class MicropostsController < ApplicationController
            UserMailer.mentioned_email(@user, current_user).deliver
          end
       }
-            
+        
+      twitter_style_username_regex = /(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+)/
+      
+      @micropost.content.scan(twitter_style_username_regex) { |u|
+        if @user = User.find_by_username(u)
+          UserMailer.mentioned_email(@user, current_user).deliver
+        end
+      }
+          
       flash[:success] = "Micropost created!"
       redirect_to root_path
     else
