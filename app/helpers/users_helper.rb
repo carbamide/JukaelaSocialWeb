@@ -22,4 +22,8 @@ module UsersHelper
     @tempPost = current_user.microposts.build(:content => content, :user_id => current_user.id)
     @tempPost.save
   end
+  
+  def find_user_from_mention(id)
+    temp_user = User.find_by_id(id)
+  end
 end
