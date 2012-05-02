@@ -10,11 +10,13 @@
 		<% if @user.username %>
 		<%= @user.username %>
 		<% else %>
-		<script type="text/javascript">
-		    $(window).load(function(){
-		        $('#no_user_name').modal('show');
-		    });
-		</script>
+			<% if @user == current_user %>
+			<script type="text/javascript">
+		    	$(window).load(function(){
+		        	$('#no_user_name').modal('show');
+		    	});
+			</script>
+			<% end %>
 		<% end %>
 	  </h4>
     </section>
