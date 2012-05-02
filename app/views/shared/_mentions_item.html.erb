@@ -1,0 +1,21 @@
+<li id="<%= mentions_item.id %>">
+
+  <%= link_to gravatar_for(mentions_item.user), mentions_item.user %>	
+
+  <span class="user">
+	<% if current_user.show_username == true %>
+			<% if mentions_item.user.username %>
+				<%= link_to mentions_item.user.username, mentions_item.user %>
+			<% else %>
+				<%= link_to mentions_item.user.name, mentions_item.user %>
+		    <% end %>
+	<% else %>
+    	<%= link_to mentions_item.user.name, mentions_item.user %>
+	<% end %>
+  </span>
+  <span class="content"><%= auto_link(mentions_item.content) %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(mentions_item.created_at) %> ago.
+  </span>	
+</li>
+

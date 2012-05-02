@@ -6,6 +6,7 @@
         <ul class="nav pull-right">
           <li><%= link_to content_tag(:i, "", :class => "icon-home icon-white") + " Home", root_path %></li>
           <% if signed_in? %>
+          <li><%= link_to content_tag(:i, "", :class => "icon-share icon-white") + " Mentions", mentions_path %></li>
             <li><%= link_to content_tag(:i, "", :class => "icon-star icon-white") + " Users", users_path %></li>
             <i class="icon-wrench icon-white"></i><li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">

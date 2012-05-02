@@ -22,4 +22,13 @@ class PagesController < ApplicationController
   def news
     @title = "News"
   end
+  
+  def mentions
+    @title = "Mentions"
+    
+    if signed_in?      
+      @mentions = current_user.mentions.paginate(:page => params[:page])
+    end
+  end
+  
 end

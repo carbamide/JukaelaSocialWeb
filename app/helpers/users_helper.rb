@@ -17,4 +17,9 @@ module UsersHelper
   def link_to_unique_modal(string)
     return_string = '#%s' % string
   end
+  
+  def create_new_micropost(content)
+    @tempPost = current_user.microposts.build(:content => content, :user_id => current_user.id)
+    @tempPost.save
+  end
 end

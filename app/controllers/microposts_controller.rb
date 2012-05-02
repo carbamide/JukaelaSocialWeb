@@ -12,6 +12,13 @@ class MicropostsController < ApplicationController
          if @user = User.find_by_name(u)
            UserMailer.mentioned_email(@user, current_user).deliver
          end
+         
+         temp_user = @user
+         
+         @mention = temp_user.mentions.build(:content => @micropost.content, 
+                                            :sender_user_id => current_user.id, 
+                                            :user_id => temp_user.id)
+         @mention.save
       }
         
       twitter_style_username_regex = /(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+)/
@@ -20,6 +27,15 @@ class MicropostsController < ApplicationController
         if @user = User.find_by_username(u)
           UserMailer.mentioned_email(@user, current_user).deliver
         end
+        
+        temp_user = @user
+        
+        @mention = temp_user.mentions.build(:content => @micropost.content, 
+                                           :sender_user_id => current_user.id, 
+                                           :user_id => temp_user.id)
+                                  
+        @mention.save
+        
       }
           
       flash[:success] = "Micropost created!"

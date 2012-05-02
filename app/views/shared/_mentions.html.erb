@@ -1,0 +1,6 @@
+<% if @mentions.any? %>
+  <ol class="microposts">
+    <%= render :partial => 'shared/mentions_item', :collection => @mentions %>
+  </ol>
+  <%= will_paginate @mentions %>
+<% end %>
