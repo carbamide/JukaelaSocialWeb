@@ -10,10 +10,24 @@
 	    <span class="caret"></span>
 	  </a>
 		<ul class="dropdown-menu">
-    		<%= link_to "delete", micropost, :method =>  :delete,
-		                                     :confirm => "You sure?",
-		                                     :title =>   micropost.content %>
+			<a href=<%= "#" + unique_modal(micropost.id, "Delete") %> data-toggle="modal">Delete</a>
   		</ul>
-</div>
-<% end %>
+	</div>
+	<% end %>
+	
+	<div class="modal fade" id=<%= unique_modal(micropost.id, "Delete") %>>
+	  <div class="modal-header">
+	    <a class="close" data-dismiss="modal">&times;</a>
+	    <h3>Delete?</h3>
+	  </div>
+	  <div class="modal-body">
+	    <p>Delete this post?</p>
+	  </div>
+	  <div class="modal-footer">
+	    <a href="#" class="btn" data-dismiss="modal">Close</a>
+	    <%= link_to "Delete", micropost, :class => "btn btn-danger",
+								         :method =>  :delete,
+	                             		 :title =>   micropost.content %>
+	  </div>
+	</div>
 </li>
