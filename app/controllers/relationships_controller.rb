@@ -6,7 +6,7 @@ class RelationshipsController < ApplicationController
         
     current_user.follow!(@user)
     
-    UserMailer.following_email(current_user, @user).deliver
+    UserMailer.following_email(@user, current_user).deliver
     
     respond_to do |format|
       format.html { redirect_to @user }
