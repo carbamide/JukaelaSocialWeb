@@ -46,8 +46,15 @@ class MicropostsController < ApplicationController
         end
       }
           
-      flash[:success] = "Micropost created!"
-      redirect_to root_path
+      respond_to do |format|
+        format.html {
+          flash[:success] = "Micropost created!"
+          redirect_to root_path
+          puts @micropost.to_json
+        }
+        format.json  { render :json => @micropost }
+      end
+      
     else
       @feed_items = []
       render 'pages/home'

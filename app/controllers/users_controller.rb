@@ -53,6 +53,11 @@ class UsersController < ApplicationController
     @microposts = @user.microposts.paginate(:page => params[:page])
     @mentions = @user.mentions.paginate(:page => params[:page])
     @title = @user.name
+    
+    respond_to do |format|
+      format.html
+      format.json  { render :json => @user }
+    end
   end
 
   def destroy
