@@ -11,6 +11,8 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(params[:micropost])
+    @micropost.name = current_user.name
+    
     if @micropost.save
       @micropost.content.scan(/"([^"]*)"/)  { |u| 
          if @user = User.find_by_name(u)
