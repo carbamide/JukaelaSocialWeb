@@ -8,9 +8,12 @@ class RelationshipsController < ApplicationController
     
     UserMailer.following_email(@user, current_user).deliver
     
+    raise current_user.inspect
+    
     respond_to do |format|
       format.html { redirect_to @user }
       format.js
+      format.json { render :json => current_user }
     end
   end
 
