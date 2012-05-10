@@ -2,6 +2,7 @@ class MicropostsController < ApplicationController
   before_filter :authenticate, :only => [:create, :destroy]
   before_filter :authorized_user, :only => :destroy
 
+  require 'rapns'
   def index
     respond_to do |format|
           format.html # index.html.erb
