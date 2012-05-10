@@ -26,7 +26,7 @@ class RelationshipsController < ApplicationController
   end
   
   def index
-    respond_to |format|
+    respond_to do |format|
       format.json { render :json => @user.following.all }
     end
   end
