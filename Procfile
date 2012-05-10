@@ -1,1 +1,1 @@
-rapns: bundle exec rapns $RACK_ENV -f
+rapns: bundle exec rapns production -f
