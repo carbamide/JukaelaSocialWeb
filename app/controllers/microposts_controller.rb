@@ -35,8 +35,7 @@ class MicropostsController < ApplicationController
            n.badge = 1
            n.expiry = 1.day.to_i
            n.deliver_after = 30.seconds.from_now
-           
-           if temp_user.apns n.save!
+           n.save!
          end
       }
         
@@ -62,8 +61,7 @@ class MicropostsController < ApplicationController
           n.badge = 1
           n.expiry = 1.day.to_i
           n.deliver_after = 30.seconds.from_now
-          
-          if temp_user.apns n.save!
+          n.save!
         end
       }
           
