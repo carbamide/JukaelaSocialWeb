@@ -14,10 +14,9 @@ development:
     poll: 60
 
 production:
-  certificate: production.pem
+  certificate: development.pem
   certificate_password:
   airbrake_notify: true
-  pid_file: tmp/pids/rapns.pid
 
   push:
     host: gateway.push.apple.com
