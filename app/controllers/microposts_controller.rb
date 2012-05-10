@@ -28,15 +28,17 @@ class MicropostsController < ApplicationController
                                             :user_id => temp_user.id)
            @mention.save
            
-#           if temp_user.apns
- #            n = Rapns::Notification.new
-  #           n.device_token = temp_user.apns
-   #          n.alert = @micropost.content
-    #         n.badge = 1
-     #        n.expiry = 1.day.to_i
-      #       n.deliver_after = 30.seconds.from_now
-       #      n.save!
-        #  end
+           if temp_user.apns
+             n = Rapns::Notification.new
+             n.device_token = temp_user.apns
+             n.alert = @micropost.content
+             n.badge = 1
+             n.expiry = 1.day.to_i
+             n.deliver_after = 30.seconds.from_now
+             n.save!
+             
+             system("bundle exec rapns production")
+          end
          end
       }
         
@@ -56,15 +58,17 @@ class MicropostsController < ApplicationController
                                            :user_id => temp_user.id)
           @mention.save
           
-          #           if temp_user.apns
-           #            n = Rapns::Notification.new
-            #           n.device_token = temp_user.apns
-             #          n.alert = @micropost.content
-              #         n.badge = 1
-               #        n.expiry = 1.day.to_i
-                #       n.deliver_after = 30.seconds.from_now
-                 #      n.save!
-                  #  end
+          if temp_user.apns
+            n = Rapns::Notification.new
+            n.device_token = temp_user.apns
+            n.alert = @micropost.content
+            n.badge = 1
+            n.expiry = 1.day.to_i
+            n.deliver_after = 30.seconds.from_now
+            n.save!
+            
+            system("bundle exec rapns production")
+          end
         end
       }
           
