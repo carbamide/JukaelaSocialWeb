@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  require 'rapns'
-
   def new
     @title = "Sign in"
   end
