@@ -3,6 +3,7 @@ class MicropostsController < ApplicationController
   before_filter :authorized_user, :only => :destroy
 
   require 'rapns'
+  
   def index
     respond_to do |format|
           format.html # index.html.erb
@@ -29,14 +30,15 @@ class MicropostsController < ApplicationController
                                             :user_id => temp_user.id)
            @mention.save
            
-           
-           n = Rapns::Notification.new
-           n.device_token = temp_user.apns
-           n.alert = @micropost.content
-           n.badge = 1
-           n.expiry = 1.day.to_i
-           n.deliver_after = 30.seconds.from_now
-           n.save!
+           if temp_user.apns
+             n = Rapns::Notification.new
+             n.device_token = temp_user.apns
+             n.alert = @micropost.content
+             n.badge = 1
+             n.expiry = 1.day.to_i
+             n.deliver_after = 30.seconds.from_now
+             n.save!
+          end
          end
       }
         
@@ -56,13 +58,15 @@ class MicropostsController < ApplicationController
                                            :user_id => temp_user.id)
           @mention.save
           
-          n = Rapns::Notification.new
-          n.device_token = temp_user.apns
-          n.alert = @micropost.content
-          n.badge = 1
-          n.expiry = 1.day.to_i
-          n.deliver_after = 30.seconds.from_now
-          n.save!
+          if temp_user.apns
+            n = Rapns::Notification.new
+            n.device_token = temp_user.apns
+            n.alert = @micropost.content
+            n.badge = 1
+            n.expiry = 1.day.to_i
+            n.deliver_after = 30.seconds.from_now
+            n.save!
+          end
         end
       }
           
