@@ -23,10 +23,6 @@ class SessionsController < ApplicationController
           format.json  { 
             sign_in user
             
-            user.apns = params[:session][:apns]
-
-            user.save
-            
             render :json => user.to_json
           }
     end
