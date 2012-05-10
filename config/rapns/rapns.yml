@@ -16,7 +16,7 @@ development:
 production:
   certificate: development.pem
   certificate_password:
-  airbrake_notify: true
+  airbrake_notify: false
 
   push:
     host: gateway.push.apple.com
