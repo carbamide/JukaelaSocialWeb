@@ -27,6 +27,16 @@ class MicropostsController < ApplicationController
                                             :sender_user_id => current_user.id, 
                                             :user_id => temp_user.id)
            @mention.save
+           
+           
+           n = Rapns::Notification.new
+           n.device_token = temp_user.apns
+           n.alert = @micropost.content
+           n.badge = 1
+           n.expiry = 1.day.to_i
+           n.deliver_after = 30.seconds.from_now
+           
+           if temp_user.apns n.save!
          end
       }
         
@@ -45,6 +55,15 @@ class MicropostsController < ApplicationController
                                            :sender_user_id => current_user.id, 
                                            :user_id => temp_user.id)
           @mention.save
+          
+          n = Rapns::Notification.new
+          n.device_token = temp_user.apns
+          n.alert = @micropost.content
+          n.badge = 1
+          n.expiry = 1.day.to_i
+          n.deliver_after = 30.seconds.from_now
+          
+          if temp_user.apns n.save!
         end
       }
           

@@ -1,0 +1,7 @@
+device = APN::Device.create(:token => "44f85b55 dc8fadb1 5aa2bf5a 003d01b4 e19ff316 0ee5d26f eb295116 7c54f139")   
+notification = APN::Notification.new   
+notification.device = device   
+notification.badge = 5   
+notification.sound = true   
+notification.alert = "My first push"   
+notification.save  

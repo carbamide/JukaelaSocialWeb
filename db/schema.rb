@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508021111) do
+ActiveRecord::Schema.define(:version => 20120510023712) do
+
+  create_table "apn_devices", :force => true do |t|
+    t.string   "token",              :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.datetime "last_registered_at"
+  end
+
+  add_index "apn_devices", ["token"], :name => "index_apn_devices_on_token", :unique => true
+
+  create_table "apn_notifications", :force => true do |t|
+    t.integer  "device_id",                        :null => false
+    t.integer  "errors_nb",         :default => 0
+    t.string   "device_language"
+    t.string   "sound"
+    t.string   "alert"
+    t.integer  "badge"
+    t.text     "custom_properties"
+    t.datetime "sent_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "apn_notifications", ["device_id"], :name => "index_apn_notifications_on_device_id"
 
   create_table "mentions", :force => true do |t|
     t.string   "content"
@@ -32,6 +56,36 @@ ActiveRecord::Schema.define(:version => 20120508021111) do
   end
 
   add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"
+
+  create_table "rapns_feedback", :force => true do |t|
+    t.string   "device_token", :limit => 64, :null => false
+    t.datetime "failed_at",                  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "rapns_feedback", ["device_token"], :name => "index_rapns_feedback_on_device_token"
+
+  create_table "rapns_notifications", :force => true do |t|
+    t.integer  "badge"
+    t.string   "device_token",          :limit => 64,                       :null => false
+    t.string   "sound",                               :default => "1.aiff"
+    t.string   "alert"
+    t.text     "attributes_for_device"
+    t.integer  "expiry",                              :default => 86400,    :null => false
+    t.boolean  "delivered",                           :default => false,    :null => false
+    t.datetime "delivered_at"
+    t.boolean  "failed",                              :default => false,    :null => false
+    t.datetime "failed_at"
+    t.integer  "error_code"
+    t.string   "error_description"
+    t.datetime "deliver_after"
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+    t.boolean  "alert_is_json",                       :default => false
+  end
+
+  add_index "rapns_notifications", ["delivered", "failed", "deliver_after"], :name => "index_rapns_notifications_on_delivered_failed_deliver_after"
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
@@ -55,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20120508021111) do
     t.string   "profile"
     t.string   "username"
     t.boolean  "show_username"
+    t.string   "apns"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

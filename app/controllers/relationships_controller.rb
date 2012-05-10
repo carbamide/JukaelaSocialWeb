@@ -7,13 +7,11 @@ class RelationshipsController < ApplicationController
     current_user.follow!(@user)
     
     UserMailer.following_email(@user, current_user).deliver
-    
-    raise current_user.inspect
-    
+        
     respond_to do |format|
       format.html { redirect_to @user }
       format.js
-      format.json { render :json => current_user }
+      format.json { render :json => @user.to_json }
     end
   end
 
@@ -23,6 +21,14 @@ class RelationshipsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @user }
       format.js
+      format.json
     end
   end
+  
+  def index
+    respond_to |format|
+      format.json { render :json => @user.following.all }
+    end
+  end
+  
 end

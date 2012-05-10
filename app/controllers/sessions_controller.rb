@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     session[:staysignedin] = (params[:session][:stay_signed_in] == "1") ? true : false
     
     user = User.authenticate(params[:session][:email], params[:session][:password])
+
     
     respond_to do |format|
           format.html {
@@ -23,7 +24,11 @@ class SessionsController < ApplicationController
           format.json  { 
             sign_in user
             
-            render :json => session.to_json
+            user.apns = params[:session][:apns]
+
+            user.save
+            
+            render :json => user.to_json
           }
     end
 
