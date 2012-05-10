@@ -1,1 +1,1 @@
-rapns: bundle exec rapns production -f
+rapns: bundle exec rapns development --foreground
