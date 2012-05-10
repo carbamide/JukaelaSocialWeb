@@ -1,1 +1,1 @@
-rapns: bundle exec rapns development --foreground
+rapns: bundle exec rapns $RACK_ENV -f
