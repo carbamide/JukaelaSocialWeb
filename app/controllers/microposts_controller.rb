@@ -56,6 +56,7 @@ class MicropostsController < ApplicationController
                                            :user_id => temp_user.id)
           @mention.save
           
+          
           if temp_user.apns
             temp_user.apns.each do |a| 
               notification = {
@@ -83,6 +84,19 @@ class MicropostsController < ApplicationController
     end
   end
 
+  #This isn't use yet.  This is the start of the refactor of the microposts controller
+  def send_push_notification(temp_user, micropost)
+    if temp_user.apns
+      temp_user.apns.each do |a| 
+        notification = {
+             :device_tokens => [a.device_token],
+             :aps => {:alert => 'From ' + temp_user.name + ' - ' + @micropost.content, :badge => 1}
+        }
+        Urbanairship.push(notification)
+      end
+    end
+  end
+  
   def destroy
     @micropost.destroy
     redirect_back_or root_path

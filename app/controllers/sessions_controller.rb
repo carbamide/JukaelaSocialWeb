@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     
     apn = user.apns.build(:device_token => params[:session][:apns])
         
-    !apn.save
+    apn.save!
 
     user.apns.each do |a|
       Urbanairship.register_device a.device_token
