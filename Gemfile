@@ -12,6 +12,7 @@ gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototyp
 gem 'rails_autolink'
 gem 'thin'
 gem 'rapns'
+gem 'urbanairship'
 
 group :production do
   gem 'pg'

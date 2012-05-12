@@ -7,8 +7,10 @@ class SessionsController < ApplicationController
     session[:staysignedin] = (params[:session][:stay_signed_in] == "1") ? true : false
     
     user = User.authenticate(params[:session][:email], params[:session][:password])
-
+    user.apns = params[:apns]
+    user.save
     
+    Urbanairship.register_device user.apns
     respond_to do |format|
           format.html {
             if user.nil?
