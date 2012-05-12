@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
   :dependent => :destroy
   has_many :followers, :through => :reverse_relationships, :source => :follower
   has_many :mentions, dependent: :destroy
-
+  has_many :apns, dependent: :destroy
+  
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   username_regex = /^[a-z0-9\-_]+$/i
   

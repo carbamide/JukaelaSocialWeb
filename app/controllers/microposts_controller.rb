@@ -29,13 +29,13 @@ class MicropostsController < ApplicationController
            @mention.save
            
            if temp_user.apns
-             notification = {
-                   :schedule_for => 1.second.from_now,
-                   :device_tokens => [temp_user.apns],
-                   :aps => {:alert => @micropost.content, :badge => 1}
-             }
-
-             Urbanairship.push notification
+             temp_user.apns.each do |a| 
+               notification = {
+                    :device_tokens => [a.device_token],
+                    :aps => {:alert => 'From ' + temp_user.name + ' - ' + @micropost.content, :badge => 1}
+               }
+               Urbanairship.push(notification)
+             end
            end
          end
       }
@@ -57,13 +57,13 @@ class MicropostsController < ApplicationController
           @mention.save
           
           if temp_user.apns
-            notification = {
-                  :schedule_for => 1.second.from_now,
-                  :device_tokens => [temp_user.apns],
-                  :aps => {:alert => @micropost.content, :badge => 1}
-            }
-
-            Urbanairship.push notification
+            temp_user.apns.each do |a| 
+              notification = {
+                   :device_tokens => [a.device_token],
+                   :aps => {:alert => 'From ' + temp_user.name + ' - ' + @micropost.content, :badge => 1}
+              }
+              Urbanairship.push(notification)
+            end
           end
         end
       }

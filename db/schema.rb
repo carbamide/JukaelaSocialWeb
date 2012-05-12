@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510023712) do
+ActiveRecord::Schema.define(:version => 20120512202405) do
 
   create_table "apn_devices", :force => true do |t|
     t.string   "token",              :null => false
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(:version => 20120510023712) do
   end
 
   add_index "apn_notifications", ["device_id"], :name => "index_apn_notifications_on_device_id"
+
+  create_table "apns", :force => true do |t|
+    t.string   "device_token", :limit => 64, :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "user_id"
+  end
 
   create_table "mentions", :force => true do |t|
     t.string   "content"
@@ -109,7 +116,6 @@ ActiveRecord::Schema.define(:version => 20120510023712) do
     t.string   "profile"
     t.string   "username"
     t.boolean  "show_username"
-    t.string   "apns"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
