@@ -13,6 +13,9 @@ gem 'rails_autolink'
 gem 'thin'
 gem 'rapns'
 gem 'urbanairship'
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'aws-s3'
 
 group :production do
   gem 'pg'

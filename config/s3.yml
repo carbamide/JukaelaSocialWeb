@@ -1,0 +1,15 @@
+DEFAULTS: &DEFAULTS
+  access_key_id: AKIAIQQFLWNJXGQX6AIQ
+  secret_access_key: 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
+
+development:
+  <<: *DEFAULTS
+  bucket: social-dev
+
+test: &TEST
+  <<: *DEFAULTS
+  bucket: social-test
+
+production:
+  <<: *DEFAULTS
+  bucket: social
