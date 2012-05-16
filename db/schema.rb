@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514015052) do
+ActiveRecord::Schema.define(:version => 20120516021416) do
 
   create_table "apn_devices", :force => true do |t|
     t.string   "token",              :null => false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20120514015052) do
     t.datetime "updated_at", :null => false
     t.string   "name"
     t.string   "username"
+    t.string   "email"
   end
 
   add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"
