@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
           format.html # index.html.erb
-          format.json  { render :json => @users }
+          format.json  { render :json => User.all }
     end
   end
 
@@ -60,6 +60,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_microposts_for_user
+  	@user = User.find(params[:id])
+  	@microposts = @user.microposts.all
+  	
+  	respond_to do |format|
+  		format.json { render :json => @microposts }
+  	end
+  end
+  
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
