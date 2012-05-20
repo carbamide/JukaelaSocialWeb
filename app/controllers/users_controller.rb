@@ -80,6 +80,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = @user.following.paginate(:page => params[:page])
     
+    raise @users.inspect
+
     respond_to do |format|
       format.html { render 'show_follow' }
       format.json { render :json => @user.following.all }
@@ -90,6 +92,8 @@ class UsersController < ApplicationController
     @title = "Followers"
     @user = User.find(params[:id])
     @users = @user.followers.paginate(:page => params[:page])
+    
+    raise @user.inspect
     
     respond_to do |format|
       format.html { render 'show_follow' }
