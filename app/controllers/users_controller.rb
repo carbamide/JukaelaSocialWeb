@@ -29,10 +29,8 @@ class UsersController < ApplicationController
     
     def update
         @user = User.find(params[:id])
-        #raise params.inspect
         if @user.update_attributes(params[:user])
             flash[:success] = "Profile updated."
-            
             redirect_to @user
             else
             @title = "Edit user"
@@ -81,9 +79,7 @@ class UsersController < ApplicationController
         @title = "Following"
         @user = User.find(params[:id])
         @users = @user.following.paginate(:page => params[:page])
-        
-        raise @users.inspect
-        
+                
         respond_to do |format|
             format.html { render 'show_follow' }
             format.json { render :json => @user.following.all }
@@ -94,9 +90,7 @@ class UsersController < ApplicationController
         @title = "Followers"
         @user = User.find(params[:id])
         @users = @user.followers.paginate(:page => params[:page])
-        
-        raise @user.inspect
-        
+                
         respond_to do |format|
             format.html { render 'show_follow' }
             format.json { render :json => @user.followers.all }
