@@ -12,14 +12,17 @@ class UsersController < ApplicationController
     def create
         @user = User.new(params[:user])
         if @user.save
+            respond_to do |format|
+                format.html {
+                    sign_in @user
+                    flash[:success] = "Welcome"
+                    redirect_to @user }
+                format.json { render :json => @user }
+            end
             UserMailer.welcome_email(@user).deliver
-            
-            sign_in @user
-            flash[:success] = "Welcome"
-            redirect_to @user
-            else
-            @title = "Sign up"
-            render 'new'
+        else
+        @title = "Sign up"
+        render 'new'
         end
     end
     
@@ -33,12 +36,12 @@ class UsersController < ApplicationController
             
             respond_to do |format|
                 format.html { flash[:success] = "Profile updated."
-                              redirect_to @user }
+                    redirect_to @user }
                 format.json { render :json => @user }
             end
-        else
-        @title = "Edit user"
-        render 'edit'
+            else
+            @title = "Edit user"
+            render 'edit'
         end
     end
     
@@ -83,7 +86,7 @@ class UsersController < ApplicationController
         @title = "Following"
         @user = User.find(params[:id])
         @users = @user.following.paginate(:page => params[:page])
-                
+        
         respond_to do |format|
             format.html { render 'show_follow' }
             format.json { render :json => @user.following.all }
@@ -94,11 +97,11 @@ class UsersController < ApplicationController
         @title = "Followers"
         @user = User.find(params[:id])
         @users = @user.followers.paginate(:page => params[:page])
-                
+        
         respond_to do |format|
             format.html { render 'show_follow' }
             format.json { render :json => @user.followers.all }
-        end 
+        end
     end
     
     private

@@ -6,11 +6,12 @@ class PagesController < ApplicationController
         format.html  { 
           if signed_in?
             @micropost = Micropost.new
+              #raise params.inspect
             @feed_items = current_user.feed.paginate(:page => params[:page])
           end
         }
-        format.json  { 
-          @feed_items = current_user.feed
+        format.json  {
+            @feed_items = current_user.feed
           render :json => @feed_items 
         }
     end
