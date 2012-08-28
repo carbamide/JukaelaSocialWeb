@@ -90,7 +90,7 @@ class UsersController < ApplicationController
         respond_to do |format|
             format.html { render 'show_follow' }
             format.json { render :json => {:user => @user.following.all,
-                :relationships => current_user.relationships.find_by_followed_id(@user)}}
+                :relationships => @user.relationships}}
         end
     end
     
