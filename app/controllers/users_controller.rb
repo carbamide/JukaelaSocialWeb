@@ -20,9 +20,9 @@ class UsersController < ApplicationController
                 format.json { render :json => @user }
             end
             UserMailer.welcome_email(@user).deliver
-        else
-        @title = "Sign up"
-        render 'new'
+            else
+            @title = "Sign up"
+            render 'new'
         end
     end
     
@@ -89,7 +89,8 @@ class UsersController < ApplicationController
         
         respond_to do |format|
             format.html { render 'show_follow' }
-            format.json { render :json => @user.following.all }
+            format.json { render :json => {:user => @user.following.all,
+                :relationships => current_user.relationships.find_by_followed_id(@user)}}
         end
     end
     
