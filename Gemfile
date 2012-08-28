@@ -16,6 +16,7 @@ gem 'urbanairship'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'aws-s3'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'pg'
