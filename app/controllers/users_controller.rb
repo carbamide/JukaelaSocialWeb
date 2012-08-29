@@ -51,7 +51,7 @@ class UsersController < ApplicationController
         
         respond_to do |format|
             format.html # index.html.erb
-            format.json  { render :json => User.all }
+            format.json  { render :json => User.all.sort_by &:name }
         end
     end
     
