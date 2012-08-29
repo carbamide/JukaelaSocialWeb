@@ -2,10 +2,11 @@ class MentionsController < ApplicationController
   before_filter :authenticate, :only => [:create, :destroy]
   before_filter :authorized_user, :only => :destroy
 
+    
   def index
     respond_to do |format|
           format.html # index.html.erb
-          format.json  { render :json => @mention }
+          format.json  { render :json => current_user.mentions.all }
     end
   end
 

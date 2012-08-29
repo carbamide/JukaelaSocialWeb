@@ -7,5 +7,5 @@ class Mention < ActiveRecord::Base
   validates :sender_user_id, presence: true
   
   default_scope order: 'mentions.created_at DESC'
-  
+
 end
