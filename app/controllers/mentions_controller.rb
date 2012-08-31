@@ -12,8 +12,7 @@ class MentionsController < ApplicationController
     
     def create
         @mention = current_user.mentions.build(params[:micropost])
-        @mention.update_attributes(:sender_email => current_user.email, :sender_name => current_user.name, :sender_username => current_user.username)
-        raise @mention.insepct
+
         @micropost = current_user.microposts.build(params[:micropost])
         
         if @mention.save

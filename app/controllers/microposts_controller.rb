@@ -28,9 +28,9 @@ class MicropostsController < ApplicationController
                 @mention = temp_user.mentions.build(:content => @micropost.content,
                                                     :sender_user_id => current_user.id,
                                                     :user_id => temp_user.id,
-                                                    :sender_email = current_user.email,
-                                                    :sender_name = current_user.name,
-                                                    :sender_username = current_user.username)
+                                                    :sender_email => current_user.email,
+                                                    :sender_name => current_user.name,
+                                                    :sender_username => current_user.username)
                 @mention.save
                 
                 send_push_notification(temp_user, @micropost)
@@ -51,9 +51,9 @@ class MicropostsController < ApplicationController
                     @mention = temp_user.mentions.build(:content => @micropost.content,
                                                         :sender_user_id => current_user.id,
                                                         :user_id => temp_user.id,
-                                                        :sender_email = current_user.email,
-                                                        :sender_name = current_user.name,
-                                                        :sender_username = current_user.username)
+                                                        :sender_email => current_user.email,
+                                                        :sender_name => current_user.name,
+                                                        :sender_username => current_user.username)
                     @mention.save
                     
                     send_push_notification(temp_user, @micropost)
