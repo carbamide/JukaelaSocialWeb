@@ -10,7 +10,7 @@ class PagesController < ApplicationController
                 end
             }
             format.json  {
-                @feed_items = current_user.all
+                @feed_items = current_user.feed.all
                 render :json => @feed_items
             }
         end
