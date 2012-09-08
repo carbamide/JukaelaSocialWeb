@@ -92,6 +92,21 @@ class MicropostsController < ApplicationController
         redirect_back_or root_path
     end
     
+    def repost
+        respond_to do |format|
+            format.html
+            format.json {
+                mp = Micropost.find(params[:id])
+                
+                @micropost = current_user.microposts.build(:name => mp.name, :username => mp.username, :email => mp.email, :content => mp.content, :user_id => mp.user_id, :repost_user_id => current_user.id, :repost_name => current_user.name, :repost_username => current_user.username)
+                
+                @micropost.save
+                
+                render :json => @micropost
+            }
+        end
+    end
+    
     private
     def authorized_user
         @micropost = current_user.microposts.find_by_id(params[:id])
