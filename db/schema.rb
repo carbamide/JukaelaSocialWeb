@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120908134639) do
+ActiveRecord::Schema.define(:version => 20120909192932) do
 
   create_table "apn_devices", :force => true do |t|
     t.string   "token",              :null => false
@@ -60,14 +60,15 @@ ActiveRecord::Schema.define(:version => 20120908134639) do
   create_table "microposts", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "name"
     t.string   "username"
     t.string   "email"
     t.integer  "repost_user_id"
     t.string   "repost_name"
     t.string   "repost_username"
+    t.integer  "original_poster_id"
   end
 
   add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"
