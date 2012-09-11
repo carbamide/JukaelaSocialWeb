@@ -7,18 +7,22 @@ Base64App::Application.routes.draw do
     
     resources :users
     resources :sessions, :only => [:new, :create, :destroy]
+    #resources :microposts, :only => [:create, :destroy, :repost]
     
     resources :microposts do
         member do
             post :create, :destroy, :repost
         end
-        collection do
-            post :index
-        end
     end
     
     resources :relationships, :only => [:create, :destroy]
     resources :mentions, :only => [:index, :new, :create, :destroy]
+    
+    resources :pages do
+        collection do
+            post :home
+        end
+    end
     
     match '/signup', :to => 'users#new'
     match '/signin', :to => 'sessions#new'

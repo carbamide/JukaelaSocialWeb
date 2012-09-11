@@ -5,10 +5,6 @@ class MicropostsController < ApplicationController
     def index
         respond_to do |format|
             format.html # index.html.erb
-            format.json {
-                @feed_items = current_user.feed.all.slice!(params[:first].to_i, params[:last].to_i)
-                render :json => @feed_items
-            }
         end
     end
     

@@ -9,8 +9,8 @@ class PagesController < ApplicationController
                     @feed_items = current_user.feed.paginate(:page => params[:page])
                 end
             }
-            format.json  {
-                @feed_items = current_user.feed.all
+            format.json {
+                @feed_items = current_user.feed.slice!(params[:first].to_i, params[:last].to_i)
                 render :json => @feed_items
             }
         end
@@ -35,7 +35,7 @@ class PagesController < ApplicationController
     def mentions
         @title = "Mentions"
         
-        if signed_in?      
+        if signed_in?
             @mentions = current_user.mentions.paginate(:page => params[:page])
         end
     end
