@@ -7,11 +7,13 @@ Base64App::Application.routes.draw do
     
     resources :users
     resources :sessions, :only => [:new, :create, :destroy]
-    #resources :microposts, :only => [:create, :destroy, :repost]
     
     resources :microposts do
         member do
             post :create, :destroy, :repost
+        end
+        collection do
+            post :index
         end
     end
     
