@@ -29,7 +29,8 @@ class MicropostsController < ApplicationController
                                                     :user_id => temp_user.id,
                                                     :sender_email => current_user.email,
                                                     :sender_name => current_user.name,
-                                                    :sender_username => current_user.username)
+                                                    :sender_username => current_user.username,
+                                                    :image_url => @micropost.image_url)
                 @mention.save
                 
                 send_push_notification(temp_user, @micropost)
@@ -52,7 +53,9 @@ class MicropostsController < ApplicationController
                                                         :user_id => temp_user.id,
                                                         :sender_email => current_user.email,
                                                         :sender_name => current_user.name,
-                                                        :sender_username => current_user.username)
+                                                        :sender_username => current_user.username,
+                                                        :image_url => @micropost.image_url)
+
                     @mention.save
                     
                     send_push_notification(temp_user, @micropost)
