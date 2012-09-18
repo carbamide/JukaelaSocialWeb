@@ -94,7 +94,7 @@ class MicropostsController < ApplicationController
             format.json {
                 mp = Micropost.find(params[:id])
                 
-                @micropost = current_user.microposts.build(:name => mp.name, :username => mp.username, :email => mp.email, :content => mp.content, :user_id => mp.user_id, :repost_user_id => current_user.id, :repost_name => current_user.name, :repost_username => current_user.username)
+                @micropost = current_user.microposts.build(:name => mp.name, :username => mp.username, :email => mp.email, :content => mp.content, :user_id => mp.user_id, :repost_user_id => current_user.id, :repost_name => current_user.name, :repost_username => current_user.username, :image_url => mp.image_url)
                 
                 @micropost.save
                 
