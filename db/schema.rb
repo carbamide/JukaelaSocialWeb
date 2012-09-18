@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120918120854) do
+ActiveRecord::Schema.define(:version => 20120918183118) do
 
   create_table "apn_devices", :force => true do |t|
     t.string   "token",              :null => false
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20120918120854) do
     t.string   "sender_email"
     t.string   "sender_name"
     t.string   "sender_username"
+    t.string   "image_url"
   end
 
   add_index "mentions", ["user_id", "sender_user_id", "created_at"], :name => "index_mentions_on_user_id_and_sender_user_id_and_created_at"
