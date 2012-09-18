@@ -1,5 +1,5 @@
 class Micropost < ActiveRecord::Base
-    attr_accessible :content, :user_id, :repost_user_id, :repost_name, :repost_username, :name, :username, :email
+    attr_accessible :content, :user_id, :repost_user_id, :repost_name, :repost_username, :name, :username, :email, :image_url
 
   belongs_to :user
 
