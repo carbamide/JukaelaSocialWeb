@@ -10,8 +10,10 @@ class PagesController < ApplicationController
                 end
             }
             format.json {
-                @feed_items = current_user.feed.slice!(params[:first].to_i, params[:last].to_i)
-                render :json => @feed_items
+                if signed_in?
+                    @feed_items = current_user.feed.slice!(params[:first].to_i, params[:last].to_i)
+                    render :json => @feed_items
+                end
             }
         end
     end
