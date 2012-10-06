@@ -76,6 +76,15 @@ class UsersController < ApplicationController
         end
     end
     
+    def number_of_posts
+        @user = User.find(params[:id])
+        @microposts = @user.microposts.all
+        
+        respond_to do |format|
+            format.json { render :json => {:count => @microposts.count}}
+        end
+    end
+    
     def destroy
         User.find(params[:id]).destroy
         flash[:success] = "User destroyed."
