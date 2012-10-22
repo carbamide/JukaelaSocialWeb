@@ -1,5 +1,5 @@
 $("#micropost_content").live('keyup', function() {
-  var maxChar = 140;
+  var maxChar = 256;
   var count = $(this).val().length;
   var remainingChar = maxChar - count;
   $("#counter").html(remainingChar);
