@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails'
 gem 'bootstrap-sass', '2.0.0'
 
 gem 'json'
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
-gem 'jquery-rails', '2.0.0'
+gem 'jquery-rails'
 gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototype_legacy_helper.git'
 gem 'rails_autolink'
 gem 'thin'
