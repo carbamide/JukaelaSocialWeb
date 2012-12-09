@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120918183118) do
+ActiveRecord::Schema.define(:version => 20121209220620) do
 
   create_table "apn_devices", :force => true do |t|
     t.string   "token",              :null => false
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(:version => 20120918183118) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
     t.integer  "user_id"
+  end
+
+  create_table "direct_messages", :force => true do |t|
+    t.string   "content"
+    t.string   "from_username"
+    t.integer  "from_user_id"
+    t.string   "from_name"
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "from_email"
   end
 
   create_table "mentions", :force => true do |t|

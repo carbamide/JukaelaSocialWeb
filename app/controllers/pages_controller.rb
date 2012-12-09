@@ -13,6 +13,8 @@ class PagesController < ApplicationController
                 if signed_in?
                     @feed_items = current_user.feed.slice!(params[:first].to_i, params[:last].to_i)
                     render :json => @feed_items
+                else
+                    raise "Not currently signed in!"
                 end
             }
         end

@@ -17,7 +17,8 @@ Base64App::Application.routes.draw do
     
     resources :relationships, :only => [:create, :destroy]
     resources :mentions, :only => [:index, :new, :create, :destroy]
-    
+    resources :direct_messages, :only => [:index, :new, :create, :destroy]
+
     resources :pages do
         collection do
             post :home
