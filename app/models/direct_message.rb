@@ -7,4 +7,6 @@ class DirectMessage < ActiveRecord::Base
     validates :from_user_id, presence: true
     validates :from_username, presence: true
     
+    default_scope :order => 'direct_messages.created_at DESC'
+
 end
