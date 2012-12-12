@@ -20,7 +20,9 @@ class DirectMessagesController < ApplicationController
                                                                                  :from_email => current_user.email,
                                                                                  :user_id => user_message_is_going_to.id)
                 
-                @direct_message.save
+                if @direct_message.save
+                    send_push_notification(user_message_is_going_to)
+                end
             }
         end
     end
@@ -34,5 +36,17 @@ class DirectMessagesController < ApplicationController
     def authorized_user
         @direct_message = current_user.direct_messages.find_by_id(params[:id])
         redirect_to root_path if @direct_messages.nil?
+    end
+    
+    def send_push_notification(temp_user)
+        if temp_user.apns
+            temp_user.apns.each do |a|
+                notification = {
+                    :device_tokens => [a.device_token],
+                    :aps => {:alert => 'Direct Message From ' + current_user.name, :badge => 1}
+                }
+                Urbanairship.push(notification)
+            end
+        end
     end
 end
