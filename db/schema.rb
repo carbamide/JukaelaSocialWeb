@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209220620) do
+ActiveRecord::Schema.define(:version => 20121220020249) do
 
   create_table "apn_devices", :force => true do |t|
     t.string   "token",              :null => false
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20121209220620) do
     t.string   "profile"
     t.string   "username"
     t.boolean  "show_username"
+    t.boolean  "send_email"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

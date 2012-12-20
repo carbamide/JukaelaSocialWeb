@@ -18,7 +18,9 @@ class MicropostsController < ApplicationController
             @micropost.content.scan(/"([^"]*)"/)  { |u|
             if @user = User.find_by_name(u)
                 unless @user.nil?
-                    UserMailer.mentioned_email(@user, current_user).deliver
+                    if @user.send_email
+                        UserMailer.mentioned_email(@user, current_user).deliver
+                    end
                 end
             end
             unless @user.nil?
@@ -42,7 +44,9 @@ class MicropostsController < ApplicationController
             @micropost.content.scan(twitter_style_username_regex) { |u|
                 if @user = User.find_by_username(u)
                     unless @user.nil?
-                        UserMailer.mentioned_email(@user, current_user).deliver
+                        if @user.send_email
+                            UserMailer.mentioned_email(@user, current_user).deliver
+                        end
                     end
                 end
                 unless @user.nil?
@@ -55,7 +59,7 @@ class MicropostsController < ApplicationController
                                                         :sender_name => current_user.name,
                                                         :sender_username => current_user.username,
                                                         :image_url => @micropost.image_url)
-
+                    
                     @mention.save
                     
                     send_push_notification(temp_user, @micropost)

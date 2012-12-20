@@ -19,7 +19,9 @@ class UsersController < ApplicationController
                     redirect_to @user }
                 format.json { render :json => @user }
             end
-            UserMailer.welcome_email(@user).deliver
+            if !user.send_email
+                UserMailer.welcome_email(@user).deliver
+            end
             else
             @title = "Sign up"
             render 'new'
