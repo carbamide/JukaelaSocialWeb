@@ -72,9 +72,9 @@ class UsersController < ApplicationController
     end
     
     def show_microposts_for_user
-        @user = User.find(params[:id])
-        @microposts = @user.microposts.all
-        
+        @user = User.find(params[:id])        
+        @microposts  = @user.microposts.slice!(params[:first].to_i, params[:last].to_i)
+
         respond_to do |format|
             format.json { render :json => @microposts }
         end
