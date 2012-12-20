@@ -21,7 +21,7 @@ Base64App::Application.routes.draw do
 
     resources :pages do
         collection do
-            post :home
+            post :home, :mentions
         end
     end
     

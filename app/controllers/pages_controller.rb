@@ -38,10 +38,20 @@ class PagesController < ApplicationController
     
     def mentions
         @title = "Mentions"
-        
-        if signed_in?
-            @mentions = current_user.mentions.paginate(:page => params[:page])
+        respond_to do |format|
+            format.html  {
+                if signed_in?
+                    @mentions = current_user.mentions.paginate(:page => params[:page])
+                end
+            }
+            format.json {
+                if signed_in?
+                    @mentions  = current_user.mentions.slice!(params[:first].to_i, params[:last].to_i)
+                    render :json => @mentions
+                else
+                    raise "Not currently signed in!"
+                end
+            }
         end
     end
-    
 end
