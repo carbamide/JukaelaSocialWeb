@@ -89,6 +89,24 @@ class UsersController < ApplicationController
         end
     end
     
+    def number_of_following
+        @user = User.find(params[:id])
+        @following = @user.following.all
+        
+        respond_to do |format|
+            format.json { render :json => {:count => @following.count}}
+        end
+    end
+    
+    def number_of_followers
+        @user = User.find(params[:id])
+        @followers = @user.followers.all
+        
+        respond_to do |format|
+            format.json { render :json => {:count => @followers.count}}
+        end
+    end
+    
     def destroy
         User.find(params[:id]).destroy
         flash[:success] = "User destroyed."
