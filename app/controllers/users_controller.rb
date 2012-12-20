@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     
     def create
         @user = User.new(params[:user])
+        @user.send_email = true
+        
         if @user.save
             respond_to do |format|
                 format.html {
