@@ -9,10 +9,20 @@ class MicropostsController < ApplicationController
     end
     
     def create
-        @micropost = current_user.microposts.build(params[:micropost])
+        image_hash = Image.upload(params[:micropost][:image])
+                
+        micropost_hash = params[:micropost]
+        
+        micropost_hash.delete("image")
+        
+        @micropost = current_user.microposts.build(micropost_hash)
         @micropost.name = current_user.name
         @micropost.username = current_user.username
         @micropost.email = current_user.email
+    
+        if image_hash
+            @micropost.image_url = Image.original_image(image_hash)
+        end
         
         if @micropost.save
             @micropost.content.scan(/"([^"]*)"/)  { |u|
@@ -76,6 +86,30 @@ class MicropostsController < ApplicationController
             end
             
         end
+    end
+    
+    def upload_image (file)
+        return '' if file.nil?
+        
+        filename = clean_filename file.original_filename
+        
+        tmp_file_path = File.join(Rails.root, 'tmp', filename)
+        
+        imgur = send_to_imgur(file, tmp_file_path)
+        
+        imgur['image_hash']
+    end
+    
+    def send_to_imgur(file, tmp_file_path)
+        
+        FileUtils.mv file.tempfile.path, tmp_file_path
+        
+        imgur = img.upload_file tmp_file_path
+        
+        FileUtils.rm tmp_file_path
+        
+        imgur
+        
     end
     
     def send_push_notification(temp_user, micropost)

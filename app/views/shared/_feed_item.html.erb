@@ -13,7 +13,13 @@
     	<%= link_to feed_item.user.name, feed_item.user %>
 	<% end %>
   </span>
-  <span class="content"><%= auto_link(feed_item.content) %></span>
+  <span class="content">
+<% if feed_item.image_url %>
+<%= auto_link(feed_item.content + " " + feed_item.image_url) %>
+<% else %>
+<%= auto_link(feed_item.content) %>
+<% end %>
+</span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
   </span>

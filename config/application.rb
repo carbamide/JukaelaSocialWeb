@@ -15,6 +15,8 @@ module Base64App
       config.middleware.use("Rack::GoogleAnalytics", :web_property_id => "UA-28525201-2")
     end
     
+    ENV['IMGUR'] = "ee66d23c163a5da80cf7a861dc2a3185"
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
