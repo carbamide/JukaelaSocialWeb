@@ -9,7 +9,9 @@ class MicropostsController < ApplicationController
     end
     
     def create
-        image_hash = Image.upload(params[:micropost][:image])
+        if params[:micropost][:image]
+            image_hash = Image.upload(params[:micropost][:image])
+        end
         
         micropost_hash = params[:micropost]
         
