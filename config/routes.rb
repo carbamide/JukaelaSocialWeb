@@ -2,7 +2,11 @@ Base64App::Application.routes.draw do
     resources :users do
         member do
             get :following, :followers, :number_of_posts, :number_of_following, :number_of_followers
-            post :show_microposts_for_user, :user_from_username
+            post :show_microposts_for_user
+        end
+        
+        collection do
+            post :user_from_username
         end
     end
     
