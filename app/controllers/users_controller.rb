@@ -71,6 +71,14 @@ class UsersController < ApplicationController
         end
     end
     
+    def user_from_username
+        @user = User.find_by_username(params[:username])
+        
+        respond_to do |format|
+            format.json { render :json => @user }
+        end
+    end
+    
     def show_microposts_for_user
         @user = User.find(params[:id])        
         @microposts  = @user.microposts.slice!(params[:first].to_i, params[:last].to_i)
