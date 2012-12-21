@@ -10,7 +10,7 @@ class MicropostsController < ApplicationController
     
     def create
         image_hash = Image.upload(params[:micropost][:image])
-                
+        
         micropost_hash = params[:micropost]
         
         micropost_hash.delete("image")
@@ -19,7 +19,7 @@ class MicropostsController < ApplicationController
         @micropost.name = current_user.name
         @micropost.username = current_user.username
         @micropost.email = current_user.email
-    
+        
         if image_hash
             @micropost.image_url = Image.original_image(image_hash)
         end
