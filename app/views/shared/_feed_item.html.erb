@@ -80,7 +80,7 @@
 	  <div class="modal-body">
 	    <%= form_for(@micropost) do |f| %>
 		  <div class="field">
-		    <%= f.text_area :content, :value => quoted_user(feed_item.user.name), :cols => "10", :rows => "8" %>
+		    <%= f.text_area :content, :value => "@" + feed_item.user.username, :cols => "10", :rows => "8" %>
 		  </div>
 		  <div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
