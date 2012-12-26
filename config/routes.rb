@@ -15,7 +15,7 @@ Base64App::Application.routes.draw do
     
     resources :microposts do
         member do
-            post :create, :destroy, :repost
+            post :create, :destroy, :repost, :thread_for_micropost
         end
     end
     
