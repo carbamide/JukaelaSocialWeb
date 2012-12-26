@@ -119,7 +119,7 @@ class MicropostsController < ApplicationController
         
         micropost = Micropost.find(params[:id])
         
-        @micropost_to_return.push(micropost)
+        micropost_to_return.push(micropost)
         
         if (micropost.in_reply_to)
             
