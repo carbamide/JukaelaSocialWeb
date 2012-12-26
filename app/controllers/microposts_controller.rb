@@ -115,30 +115,30 @@ class MicropostsController < ApplicationController
     end
     
     def thread_for_micropost
-        microposts_to_return = Array.new
+        @microposts_to_return = Array.new
         
         micropost = Micropost.find(params[:id])
         
-        micropost_to_return.push(micropost)
+        @micropost_to_return.push(micropost)
         
         if (micropost.in_reply_to)
             
             another_micropost = Micropost.find(micropost.in_reply_to)
             
-            microposts_to_return.push(another_micropost)
+            @microposts_to_return.push(another_micropost)
             
             __label__(:loop)
             
             if (another_micropost.in_reply_to)
                 another_micropost = Micropost.find(another_micropost.in_reply_to)
                 
-                micropost_to_return.push(another_micropost)
+                @micropost_to_return.push(another_micropost)
                 
                 __goto__(:loop)
                 else
                 respond_to do | format|
                     format.json {
-                        render :json => microposts_to_return
+                        render :json => @microposts_to_return
                     }
                 end
             end
