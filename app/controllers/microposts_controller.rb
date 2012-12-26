@@ -119,28 +119,26 @@ class MicropostsController < ApplicationController
         
         micropost = Micropost.find(params[:id])
         
-        @micropost_to_return.push(micropost)
+        @microposts_to_return.push(micropost)
         
         if (micropost.in_reply_to)
-            
             another_micropost = Micropost.find(micropost.in_reply_to)
             
             @microposts_to_return.push(another_micropost)
             
-            __label__(:loop)
+            if another_micropost.in_reply_to?
+                begin
+                    another_micropost = Micropost.find(another_micropost.in_reply_to)
+                    
+                    @microposts_to_return.push(another_micropost)
+                end while another_micropost.in_reply_to?
+            end
             
-            if (another_micropost.in_reply_to)
-                another_micropost = Micropost.find(another_micropost.in_reply_to)
+            respond_to do | format|
+                format.json {
+                    render :json => @microposts_to_return
+                }
                 
-                @micropost_to_return.push(another_micropost)
-                
-                __goto__(:loop)
-                else
-                respond_to do | format|
-                    format.json {
-                        render :json => @microposts_to_return
-                    }
-                end
             end
         end
     end
