@@ -121,7 +121,7 @@ class MicropostsController < ApplicationController
         
         @microposts_to_return.push(micropost)
         
-        if (micropost.in_reply_to)
+        if micropost.in_reply_to?
             another_micropost = Micropost.find(micropost.in_reply_to)
             
             @microposts_to_return.push(another_micropost)
