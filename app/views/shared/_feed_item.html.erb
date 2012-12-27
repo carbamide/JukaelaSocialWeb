@@ -81,6 +81,7 @@
 	    <%= form_for(@micropost) do |f| %>
 		  <div class="field">
 		    <%= f.text_area :content, :value => "@" + feed_item.user.username, :cols => "10", :rows => "8" %>
+            <%= f.hidden_field :in_reply_to, :value => feed_item.id  %>
 		  </div>
 		  <div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
