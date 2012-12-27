@@ -8,6 +8,15 @@ class MicropostsController < ApplicationController
         end
     end
     
+    def show
+        @micropost = Micropost.find(params[:id])
+        
+        respond_to do |format|
+            format.html
+            format.json  { render :json => @micropost }
+        end
+    end
+    
     def create
         if params[:micropost][:image]
             image_hash = Image.upload(params[:micropost][:image])

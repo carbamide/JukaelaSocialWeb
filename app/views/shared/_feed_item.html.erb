@@ -22,6 +22,9 @@
 </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+    <% if feed_item.in_reply_to %>
+    In reply to <%= link_to "this post.", micropost_path(feed_item.in_reply_to) %>
+    <% end %>
   </span>
 	<div class="btn-group">
 	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

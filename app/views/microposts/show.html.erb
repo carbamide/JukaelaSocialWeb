@@ -1,0 +1,82 @@
+<li id="<%= @micropost.id %>">
+
+<%= link_to gravatar_for(@micropost.user), @micropost.user %>
+
+<span class="user">
+<% if current_user.show_username == true %>
+<% if @micropost.user.username %>
+<%= link_to @micropost.user.username, @micropost.user %>
+<% else %>
+<%= link_to @micropost.user.name, @micropost.user %>
+<% end %>
+<% else %>
+<%= link_to @micropost.user.name, @micropost.user %>
+<% end %>
+</span>
+<span class="content">
+<% if @micropost.image_url %>
+<%= auto_link(@micropost.content + " " + @micropost.image_url) %>
+<% else %>
+<%= auto_link(@micropost.content) %>
+<% end %>
+</span>
+<span class="timestamp">
+Posted <%= time_ago_in_words(@micropost.created_at) %> ago.
+<% if @micropost.in_reply_to %>
+In reply to <%= link_to "this post.", micropost_path(@micropost.in_reply_to) %>
+<% end %>
+</span>
+
+<div class="modal fade" id=<%= unique_modal(@micropost.id, "Repost") %>>
+<div class="modal-header">
+<a class="close" data-dismiss="modal">&times;</a>
+<h3>Repost</h3>
+</div>
+<div class="modal-body">
+<%= form_for(@micropost) do |f| %>
+<div class="field">
+<%= f.text_area :content, :value => @micropost.content, :cols => "10", :rows => "8" %>
+</div>
+<div class="modal-footer">
+<a href="#" class="btn" data-dismiss="modal">Close</a>
+<%= f.submit "Reply", :class => "btn btn-primary" %>
+</div>
+<% end %>
+</div>
+</div>
+
+<div class="modal fade" id=<%= unique_modal(@micropost.id, "Delete") %>>
+<div class="modal-header">
+<a class="close" data-dismiss="modal">&times;</a>
+<h3>Delete?</h3>
+</div>
+<div class="modal-body">
+<p>Delete this post?</p>
+</div>
+<div class="modal-footer">
+<a href="#" class="btn" data-dismiss="modal">Close</a>
+<%= link_to "Delete", @micropost, :class => "btn btn-danger",
+:method =>  :delete,
+:title =>   @micropost.content %>
+</div>
+</div>
+
+<div class="modal fade" id=<%= unique_modal(@micropost.id, "Reply") %>>
+<div class="modal-header">
+<a class="close" data-dismiss="modal">&times;</a>
+<h3>Reply</h3>
+</div>
+<div class="modal-body">
+<%= form_for(@micropost) do |f| %>
+<div class="field">
+<%= f.text_area :content, :value => "@" + @micropost.user.username, :cols => "10", :rows => "8" %>
+<%= f.hidden_field :in_reply_to, :value => @micropost.id  %>
+</div>
+<div class="modal-footer">
+<a href="#" class="btn" data-dismiss="modal">Close</a>
+<%= f.submit "Reply", :class => "btn btn-primary" %>
+</div>
+<% end %>
+</div>
+</div>
+</li>
