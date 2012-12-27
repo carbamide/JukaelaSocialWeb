@@ -9,11 +9,28 @@ class MicropostsController < ApplicationController
     end
     
     def show
-        @micropost = Micropost.find(params[:id])
+        @microposts = Array.new
         
-        respond_to do |format|
-            format.html
-            format.json  { render :json => @micropost }
+        micropost = Micropost.find(params[:id])
+        
+        @microposts.push(micropost)
+        
+        if micropost.in_reply_to?
+            another_micropost = Micropost.find(micropost.in_reply_to)
+            
+            @microposts.push(another_micropost)
+            
+            if another_micropost.in_reply_to?
+                begin
+                    another_micropost = Micropost.find(another_micropost.in_reply_to)
+                    
+                    @microposts.push(another_micropost)
+                end while another_micropost.in_reply_to?
+            end
+            
+            respond_to do | format|
+                format.html
+            end
         end
     end
     

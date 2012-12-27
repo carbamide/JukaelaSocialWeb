@@ -1,0 +1,26 @@
+<li id="<%= reply_item.id %>">
+    <%= link_to gravatar_for(reply_item.user), reply_item.user %>
+    <span class="user">
+        <% if current_user.show_username == true %>
+            <% if reply_item.user.username %>
+                <%= link_to reply_item.user.username, reply_item.user %>
+            <% else %>
+                <%= link_to reply_item.user.name, reply_item.user %>
+            <% end %>
+        <% else %>
+            <%= link_to reply_item.user.name, reply_item.user %>
+        <% end %>
+    </span>
+    <span class="content">
+        <% if reply_item.image_url %>
+            <%= auto_link(reply_item.content + " " + reply_item.image_url) %>
+        <% else %>
+            <%= auto_link(reply_item.content) %>
+        <% end %>
+    </span>
+    <span class="timestamp">Posted <%= time_ago_in_words(reply_item.created_at) %> ago.
+        <% if reply_item.in_reply_to %>
+            In reply to <%= link_to "this post.", micropost_path(reply_item.in_reply_to) %>
+        <% end %>
+    </span>
+</li>
