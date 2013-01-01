@@ -31,6 +31,6 @@ class UserMailer < ActionMailer::Base
         
         @url = "http://cold-planet-7717.herokuapp.com/signin"
         
-        mail(:to=> user.email, :subject => "You have been mentioned on Jukaela!")
+        mail(:to=> user.email, :subject => "Your post was liked!  What?!")
     end
 end
