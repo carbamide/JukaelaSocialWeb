@@ -137,7 +137,6 @@ class MicropostsController < ApplicationController
         FileUtils.rm tmp_file_path
         
         imgur
-        
     end
     
     def thread_for_micropost
@@ -160,12 +159,26 @@ class MicropostsController < ApplicationController
                 end while another_micropost.in_reply_to?
             end
             
-            respond_to do | format|
+            respond_to do |format|
                 format.json {
                     render :json => @microposts_to_return
                 }
                 
             end
+        end
+    end
+    
+    def like
+        micropost = Micropost.find(params[:id])
+        
+        lu = micropost.like_users.build(:name => current_user.name, :username => current_user.username, :user_id => current_user.id)
+        
+        lu.save
+        
+        respond_to do |format|
+            format.json {
+                render :json => micropost
+            }
         end
     end
     
