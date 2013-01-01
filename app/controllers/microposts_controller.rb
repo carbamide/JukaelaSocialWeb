@@ -173,7 +173,17 @@ class MicropostsController < ApplicationController
         
         lu = micropost.like_users.build(:name => current_user.name, :username => current_user.username, :user_id => current_user.id)
         
-        lu.save
+        if lu.save
+            temp_user = User.find(micropost.user_id)
+            
+            temp_user.apns.each do |a|
+                notification = {
+                    :device_tokens => [a.device_token],
+                    :aps => {:alert => 'Like from - ' + current_user.name + ' - ' + micropost.content, :badge => 1}
+                }
+                Urbanairship.push(notification)
+            end
+        end
         
         respond_to do |format|
             format.json {
