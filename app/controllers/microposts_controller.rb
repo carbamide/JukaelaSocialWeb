@@ -183,6 +183,9 @@ class MicropostsController < ApplicationController
                 }
                 Urbanairship.push(notification)
             end
+            if temp_user.send_email
+                UserMailer.liked_email(temp_user, current_user, micropost).deliver
+            end
         end
         
         respond_to do |format|
