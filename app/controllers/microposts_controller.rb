@@ -171,7 +171,7 @@ class MicropostsController < ApplicationController
     def like
         micropost = Micropost.find(params[:id])
         
-        lu = micropost.like_users.build(:name => current_user.name, :username => current_user.username, :user_id => current_user.id)
+        lu = micropost.like_users.build(:name => current_user.name, :username => current_user.username, :user_id => current_user.id, :email => current_user.email)
         
         if micropost.like_users.find_by_user_id(current_user.id).nil?
             if lu.save
