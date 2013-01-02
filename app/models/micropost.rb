@@ -17,6 +17,10 @@ class Micropost < ActiveRecord::Base
         self.like_users.all.count
     end
     
+    def users_who_liked
+        self.like_users.all
+    end
+    
     private
     def self.followed_by(user)
         following_ids = %(SELECT followed_id FROM relationships

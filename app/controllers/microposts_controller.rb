@@ -204,7 +204,7 @@ class MicropostsController < ApplicationController
                     render :json => {:error => "Already liked"}
                 }
                 format.html {
-                    flash[:success] = "Already liked! You can't like twice!"
+                    flash[:error] = "Already liked! You can't like twice!"
                     redirect_to root_path
                 }
             end
