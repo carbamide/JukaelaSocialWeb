@@ -173,29 +173,41 @@ class MicropostsController < ApplicationController
         
         lu = micropost.like_users.build(:name => current_user.name, :username => current_user.username, :user_id => current_user.id)
         
-        if lu.save
-            temp_user = User.find(micropost.user_id)
+        if micropost.like_users.find_by_user_id(current_user.id).nil?
+            if lu.save
+                temp_user = User.find(micropost.user_id)
+                
+                temp_user.apns.each do |a|
+                    notification = {
+                        :device_tokens => [a.device_token],
+                        :aps => {:alert => 'Like from - ' + current_user.name + ' - ' + micropost.content, :badge => 1}
+                    }
+                    Urbanairship.push(notification)
+                end
+                if temp_user.send_email
+                    UserMailer.liked_email(temp_user, current_user, micropost).deliver
+                end
+            end
             
-            temp_user.apns.each do |a|
-                notification = {
-                    :device_tokens => [a.device_token],
-                    :aps => {:alert => 'Like from - ' + current_user.name + ' - ' + micropost.content, :badge => 1}
+            respond_to do |format|
+                format.json {
+                    render :json => micropost
                 }
-                Urbanairship.push(notification)
+                format.html {
+                    flash[:success] = "Liked!"
+                    redirect_to root_path
+                }
             end
-            if temp_user.send_email
-                UserMailer.liked_email(temp_user, current_user, micropost).deliver
+        else
+            respond_to do |format|
+                format.json {
+                    render :json => {:error => "Already liked"}
+                }
+                format.html {
+                    flash[:success] = "Already liked! You can't like twice!"
+                    redirect_to root_path
+                }
             end
-        end
-        
-        respond_to do |format|
-            format.json {
-                render :json => micropost
-            }
-            format.html {
-                flash[:success] = "Liked!"
-                redirect_to root_path
-            }
         end
     end
     
