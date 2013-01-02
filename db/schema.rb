@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130101212920) do
+ActiveRecord::Schema.define(:version => 20130102200844) do
 
   create_table "apn_devices", :force => true do |t|
     t.string   "token",              :null => false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20130101212920) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "micropost_id"
+    t.string   "email"
   end
 
   create_table "mentions", :force => true do |t|
