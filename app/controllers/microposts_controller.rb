@@ -192,6 +192,10 @@ class MicropostsController < ApplicationController
             format.json {
                 render :json => micropost
             }
+            format.html {
+                flash[:success] = "Liked!"
+                redirect_to root_path
+            }
         end
     end
     

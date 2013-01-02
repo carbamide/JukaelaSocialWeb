@@ -21,10 +21,11 @@
 <% end %>
 </span>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+    Posted <%= time_ago_in_words(feed_item.created_at) %> ago.<br />
     <% if feed_item.in_reply_to %>
-    <%= link_to "Show thread", micropost_path(feed_item.in_reply_to) %>
+    <%= link_to "Show thread", micropost_path(feed_item.in_reply_to) %><br />
     <% end %>
+    <%= link_to "Like", like_micropost_path(feed_item.id) %><br />
   </span>
 	<div class="btn-group">
 	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
