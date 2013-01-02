@@ -13,7 +13,7 @@ require 'digest'
 
 class User < ActiveRecord::Base
     attr_accessor :password
-    attr_accessible :name, :email, :password, :password_confirmation, :profile, :username, :show_username, :apns, :send_email
+    attr_accessible :name, :email, :password, :password_confirmation, :profile, :username, :show_username, :apns, :send_email, :apids
     
     has_many :microposts, :dependent => :destroy
     has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
     has_many :followers, :through => :reverse_relationships, :source => :follower
     has_many :mentions, dependent: :destroy
     has_many :apns, dependent: :destroy
+    has_many :apids, dependent: :destroy
+    
     has_many :direct_messages, :dependent => :destroy
     
     email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
