@@ -23,8 +23,8 @@ class SessionsController < ApplicationController
                 Urbanairship.register_device a.device_token
             end
             
-            user.apids.each do |a|
-                Urbanairship.register_device (a.device_token, :provider => :android)
+            user.apids.each do |ap|
+                Urbanairship.register_device(ap.device_token, :provider => :android)
             end
         end
         
