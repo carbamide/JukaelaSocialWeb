@@ -47,6 +47,15 @@ class DirectMessagesController < ApplicationController
                 }
                 Urbanairship.push(notification)
             end
+            
+            temp_user.apids.each do |a|
+                notification = {
+                    :apids => [a.device_token],
+                    :android =>{:alert => 'Direct Message From ' + current_user.name}
+                }
+                
+                Urbanairship.push(notification)
+            end
         end
     end
 end

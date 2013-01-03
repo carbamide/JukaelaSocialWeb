@@ -184,6 +184,16 @@ class MicropostsController < ApplicationController
                     }
                     Urbanairship.push(notification)
                 end
+                
+                temp_user.apids.each do |a|
+                    notification = {
+                        :apids => [a.device_token],
+                        :android =>{:alert => 'Like from - ' + current_user.name + ' - ' + micropost.content}
+                    }
+                    
+                    Urbanairship.push(notification)
+                end
+                
                 if temp_user.send_email
                     UserMailer.liked_email(temp_user, current_user, micropost).deliver
                 end
@@ -218,6 +228,14 @@ class MicropostsController < ApplicationController
                     :device_tokens => [a.device_token],
                     :aps => {:alert => 'From ' + current_user.name + ' - ' + @micropost.content, :badge => 1}
                 }
+                Urbanairship.push(notification)
+            end
+            temp_user.apids.each do |a|
+                notification = {
+                    :apids => [a.device_token],
+                    :android =>{:alert => 'From ' + current_user.name + ' - ' + @micropost.content}
+                }
+                
                 Urbanairship.push(notification)
             end
         end
