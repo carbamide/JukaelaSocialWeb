@@ -26,7 +26,11 @@
     <%= link_to "Show thread", micropost_path(feed_item.in_reply_to) %><br />
     <% end %>
     <%= link_to "Like", like_micropost_path(feed_item.id) %><br />
-  </span>
+
+    <% if feed_item.like_users.count > 0 %>
+    <%= link_to "Show Likes", likes_for_micropost_micropost_path(feed_item) %>
+    <% end %>
+</span>
 	<div class="btn-group">
 	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 	    <i class="icon-cog"></i>

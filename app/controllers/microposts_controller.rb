@@ -129,7 +129,6 @@ class MicropostsController < ApplicationController
     end
     
     def send_to_imgur(file, tmp_file_path)
-        
         FileUtils.mv file.tempfile.path, tmp_file_path
         
         imgur = img.upload_file tmp_file_path
@@ -182,6 +181,8 @@ class MicropostsController < ApplicationController
                         :device_tokens => [a.device_token],
                         :aps => {:alert => 'Like from - ' + current_user.name + ' - ' + micropost.content, :badge => 1}
                     }
+                    
+                    Urbanairship.provider = :ios
                     Urbanairship.push(notification)
                 end
                 
@@ -191,6 +192,7 @@ class MicropostsController < ApplicationController
                         :android =>{:alert => 'Like from - ' + current_user.name + ' - ' + micropost.content}
                     }
                     
+                    Urbanairship.provider = :android
                     Urbanairship.push(notification)
                 end
                 
@@ -208,7 +210,7 @@ class MicropostsController < ApplicationController
                     redirect_to root_path
                 }
             end
-        else
+            else
             respond_to do |format|
                 format.json {
                     render :json => {:error => "Already liked"}
@@ -259,6 +261,17 @@ class MicropostsController < ApplicationController
                 @micropost.save
                 
                 render :json => @micropost
+            }
+        end
+    end
+    
+    def likes_for_micropost
+        @micropost = Micropost.find(params[:id])
+        
+        respond_to do |format|
+            format.html
+            format.json {
+                render :json => @micropost.like_users
             }
         end
     end
