@@ -228,6 +228,7 @@ class MicropostsController < ApplicationController
                     :device_tokens => [a.device_token],
                     :aps => {:alert => 'From ' + current_user.name + ' - ' + @micropost.content, :badge => 1}
                 }
+                Urbanairship.provider = :ios
                 Urbanairship.push(notification)
             end
             temp_user.apids.each do |a|
@@ -236,6 +237,7 @@ class MicropostsController < ApplicationController
                     :android =>{:alert => 'From ' + current_user.name + ' - ' + @micropost.content}
                 }
                 
+                Urbanairship.provider = :android
                 Urbanairship.push(notification)
             end
         end
