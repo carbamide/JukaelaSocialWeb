@@ -9,13 +9,29 @@ class SessionsController < ApplicationController
         user = User.authenticate(params[:session][:email], params[:session][:password])
         
         if params[:session][:apns]
+            save_device_token = true
+            
             if params[:session][:apns].length == 64
                 apn = user.apns.build(:device_token => params[:session][:apns])
+                
+                user.apns.each do |a|
+                    if apn.device_token.eql?(a.device_token)
+                        save_device_token = false
+                    end
+                end
             else
                 apn = user.apids.build(:device_token => params[:session][:apns])
+                
+                user.apids.each do |a|
+                    if apn.device_token.eql?(a.device_token)
+                        save_device_token = false
+                    end
+                end
             end
             
-            apn.save
+            if save_device_token == true
+                apn.save
+            end
         end
         
         if user
@@ -39,7 +55,7 @@ class SessionsController < ApplicationController
                     redirect_back_or root_path
                 end
             }
-            format.json  { 
+            format.json  {
                 sign_in user
                 
                 render :json => user.to_json
