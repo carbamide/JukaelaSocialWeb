@@ -12,17 +12,21 @@ class SessionsController < ApplicationController
       save_device_token = true
             
       if params[:session][:apns].length == 64
+        user.apns.each do |a|
+          if a.device_token.eql?(params[:session][:apns])
+            save_device_token = false
+          end
+        end
+        
         apn = user.apns.build(:device_token => params[:session][:apns])
       else
-        apn = user.apids.build(:device_token => params[:session][:apns])
-      end
-         
-      user.apns.each do |a|
-        if a.device_token.eql?(params[:session][:apns])
-          puts "Device token -" + a.device_token.inspect
-          puts "params token -" + params[:session][:apns]
-          save_device_token = false
+        user.apids.each do |a|
+          if a.device_token.eql?(params[:session][:apns])
+            save_device_token = false
+          end
         end
+        
+        apn = user.apids.build(:device_token => params[:session][:apns])
       end
          
       if save_device_token == true
