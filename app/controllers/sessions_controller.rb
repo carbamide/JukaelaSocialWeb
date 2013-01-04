@@ -19,6 +19,8 @@ class SessionsController < ApplicationController
          
       user.apns.each do |a|
         if a.device_token.eql?(params[:session][:apns])
+          puts "Device token -" + a.device_token.inspect
+          puts "params token -" + params[:session][:apns]
           save_device_token = false
         end
       end
