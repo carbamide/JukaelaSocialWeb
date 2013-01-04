@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
                 apn = user.apns.build(:device_token => params[:session][:apns])
                 
                 user.apns.each do |a|
-                    if apn.device_token.eql?(a.device_token)
+                    if a.device_token.eql?(params[:session][:apns])
                         save_device_token = false
                     end
                 end
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
                 apn = user.apids.build(:device_token => params[:session][:apns])
                 
                 user.apids.each do |a|
-                    if apn.device_token.eql?(a.device_token)
+                    if a.device_token.eql?(params[:session][:apns])
                         save_device_token = false
                     end
                 end
