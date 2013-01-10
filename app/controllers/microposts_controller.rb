@@ -275,7 +275,7 @@ class MicropostsController < ApplicationController
             }
         end
     end
-    
+      
     def images_from_feed
       images = Array.new
       
@@ -285,14 +285,15 @@ class MicropostsController < ApplicationController
         end
       end
       
+      image_urls_to_return = images.take(100);
+      
       respond_to do |format|
         format.html
         format.json {
-          render :json => images
+          render :json => image_urls_to_return
         }
       end
     end
-      
     private
     def authorized_user
         @micropost = current_user.microposts.find_by_id(params[:id])
