@@ -281,19 +281,24 @@ class MicropostsController < ApplicationController
       
       Micropost.all.each do |m|
         if m.image_url
-          images.push(m.image_url)
+          return_hash = Hash.new
+        
+          return_hash["imageFilename"] = m.image_url
+          return_hash["size"] = (0..2).to_a.sample
+          return_hash["title"] = m.content
+          
+          images.push(return_hash)
         end
       end
-      
-      image_urls_to_return = images.take(100);
-      
+
       respond_to do |format|
         format.html
         format.json {
-          render :json => image_urls_to_return
+          render :json => images
         }
       end
     end
+    
     private
     def authorized_user
         @micropost = current_user.microposts.find_by_id(params[:id])
