@@ -294,7 +294,7 @@ class MicropostsController < ApplicationController
       respond_to do |format|
         format.html
         format.json {
-          render :json => images
+          render :json => images.sort_by{rand}
         }
       end
     end
