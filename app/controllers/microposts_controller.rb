@@ -276,6 +276,23 @@ class MicropostsController < ApplicationController
         end
     end
     
+    def images_from_feed
+      images = Array.new
+      
+      Micropost.all.each do |m|
+        if m.image_url
+          images.push(m.image_url)
+        end
+      end
+      
+      respond_to do |format|
+        format.html
+        format.json {
+          render :json => images
+        }
+      end
+    end
+      
     private
     def authorized_user
         @micropost = current_user.microposts.find_by_id(params[:id])

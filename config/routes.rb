@@ -18,6 +18,9 @@ Base64App::Application.routes.draw do
             post :create, :destroy, :repost
             get :thread_for_micropost, :like, :likes_for_micropost
         end
+        collection do
+          get :images_from_feed
+        end
     end
     
     resources :relationships, :only => [:create, :destroy]
