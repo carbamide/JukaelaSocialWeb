@@ -27,12 +27,6 @@ Base64App::Application.routes.draw do
     resources :mentions, :only => [:index, :new, :create, :destroy]
     resources :direct_messages, :only => [:index, :new, :create, :destroy]
 
-    resources :pages do
-        collection do
-            post :home, :mentions
-        end
-    end
-    
     match '/signup', :to => 'users#new'
     match '/signin', :to => 'sessions#new'
     match '/signout', :to => 'sessions#destroy'
