@@ -1,102 +1,82 @@
 <li id="<%= feed_item.id %>">
 
-  <%= link_to gravatar_for(feed_item.user), feed_item.user %>	
+	<%= link_to gravatar_for(feed_item.user), feed_item.user %>	
 
-  <span class="user">
-	<% if current_user.show_username == true %>
-			<% if feed_item.user.username %>
-				<%= link_to feed_item.user.username, feed_item.user %>
-			<% else %>
-				<%= link_to feed_item.user.name, feed_item.user %>
-		    <% end %>
-	<% else %>
-    	<%= link_to feed_item.user.name, feed_item.user %>
-	<% end %>
-  </span>
-  <span class="content">
-<% if feed_item.image_url %>
-<%= auto_link(feed_item.content + " " + feed_item.image_url) %>
-<% else %>
-<%= auto_link(feed_item.content) %>
-<% end %>
-</span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(feed_item.created_at) %> ago.<br />
-    <% if feed_item.in_reply_to %>
-    <%= link_to "Show thread", micropost_path(feed_item.in_reply_to) %><br />
-    <% end %>
-    <%= link_to "Like", like_micropost_path(feed_item.id) %><br />
-
-    <% if feed_item.like_users.count > 0 %>
-    <%= link_to "Show Likes", likes_for_micropost_micropost_path(feed_item) %>
-    <% end %>
-</span>
-	<div class="btn-group">
-	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-	    <i class="icon-cog"></i>
-	    <span class="caret"></span>
-	  </a>
-  		<ul class="dropdown-menu">
-		  <% if current_user?(feed_item.user) %>
-    		<a href=<%= "#" + unique_modal(feed_item.id, "Delete") %> data-toggle="modal">Delete</a>
-			<% else %>
-			<a href=<%= "#" + unique_modal(feed_item.id, "Repost") %> data-toggle="modal">Repost</a>
-			<a href=<%= "#" + unique_modal(feed_item.id, "Reply") %> data-toggle="modal">Reply</a>
-			<% end %>
- 		</ul>
-	</div>	
-	
-	<div class="modal fade" id=<%= unique_modal(feed_item.id, "Repost") %>>
-	  <div class="modal-header">
-	    <a class="close" data-dismiss="modal">&times;</a>
-	    <h3>Repost</h3>
-	  </div>
-	  <div class="modal-body">
-	    <%= form_for(@micropost) do |f| %>
-		  <div class="field">
-		    <%= f.text_area :content, :value => feed_item.content, :cols => "10", :rows => "8" %>
-		  </div>
-		  <div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-		  	<%= f.submit "Reply", :class => "btn btn-primary" %>
-		</div>
+	<span class="user">
+		<% if current_user.show_username == true %>
+		<% if feed_item.user.username %>
+		<%= link_to feed_item.user.username, feed_item.user %>
+		<% else %>
+		<%= link_to feed_item.user.name, feed_item.user %>
 		<% end %>
-	  </div>
+		<% else %>
+		<%= link_to feed_item.user.name, feed_item.user %>
+		<% end %>
+	</span>
+	<span class="content">
+		<% if feed_item.image_url %>
+		<%= auto_link(feed_item.content + " " + feed_item.image_url) %>
+		<% else %>
+		<%= auto_link(feed_item.content) %>
+		<% end %>
+	</span>
+	<span class="timestamp">
+		Posted <%= time_ago_in_words(feed_item.created_at) %> ago.<br />
+	</span>
+	<div class="btn-group">
+		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			<i class="icon-cog"></i>
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<% if current_user?(feed_item.user) %>
+			<a href=<%= "#" + unique_modal(feed_item.id, "Delete") %> data-toggle="modal">Delete</a>
+			<% else %>
+			<a href=<%= "#" + unique_modal(feed_item.id, "Reply") %> data-toggle="modal">Reply</a>
+			<%= link_to "Like", like_micropost_path(feed_item.id) %>
+			<% end %>
+			<% if feed_item.in_reply_to %>
+			<%= link_to "Show thread", micropost_path(feed_item.in_reply_to) %><br />
+			<% end %>
+			<% if feed_item.like_users.count > 0 %>
+			<%= link_to "Show Likes", likes_for_micropost_micropost_path(feed_item) %>
+			<% end %>
+		</ul>
 	</div>	
 
 	<div class="modal fade" id=<%= unique_modal(feed_item.id, "Delete") %>>
-	  <div class="modal-header">
-	    <a class="close" data-dismiss="modal">&times;</a>
-	    <h3>Delete?</h3>
-	  </div>
-	  <div class="modal-body">
-	    <p>Delete this post?</p>
-	  </div>
-	  <div class="modal-footer">
-	    <a href="#" class="btn" data-dismiss="modal">Close</a>
-	    <%= link_to "Delete", feed_item, :class => "btn btn-danger",
-								         :method =>  :delete,
-	                             		 :title =>   feed_item.content %>
-	  </div>
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal">&times;</a>
+			<h3>Delete?</h3>
+		</div>
+		<div class="modal-body">
+			<p>Delete this post?</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<%= link_to "Delete", feed_item, :class => "btn btn-danger",
+			:method =>  :delete,
+			:title =>   feed_item.content %>
+		</div>
 	</div>
 
 	<div class="modal fade" id=<%= unique_modal(feed_item.id, "Reply") %>>
-	  <div class="modal-header">
-	    <a class="close" data-dismiss="modal">&times;</a>
-	    <h3>Reply</h3>
-	  </div>
-	  <div class="modal-body">
-	    <%= form_for(@micropost) do |f| %>
-		  <div class="field">
-		    <%= f.text_area :content, :value => "@" + feed_item.user.username, :cols => "10", :rows => "8" %>
-            <%= f.hidden_field :in_reply_to, :value => feed_item.id  %>
-		  </div>
-		  <div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-		  	<%= f.submit "Reply", :class => "btn btn-primary" %>
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal">&times;</a>
+			<h3>Reply</h3>
 		</div>
-		<% end %>
-	  </div>
+		<div class="modal-body">
+			<%= form_for(@micropost) do |f| %>
+			<div class="field">
+				<%= f.text_area :content, :value => "@" + feed_item.user.username, :cols => "10", :rows => "8" %>
+				<%= f.hidden_field :in_reply_to, :value => feed_item.id  %>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<%= f.submit "Reply", :class => "btn btn-primary" %>
+			</div>
+			<% end %>
+		</div>
 	</div>
 </li>
 
