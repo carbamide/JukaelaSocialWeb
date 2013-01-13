@@ -36,6 +36,7 @@ Base64App::Application.routes.draw do
     match '/help',    :to => 'pages#help'
     match '/mentions',    :to => 'pages#mentions'
     match '/home', :to => 'pages#home'
+    match '/pages/mentions', :to => 'pages#mentions'
     root :to => 'pages#home'
     
 end
