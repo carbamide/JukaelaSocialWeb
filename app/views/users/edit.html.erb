@@ -2,37 +2,37 @@
 <h1>Update your profile</h1>
 
 <div class="row">
-  <div class="span6 offset3">
-  <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages', :object => f.object %>
+	<div class="span6 offset3">
+		<%= form_for(@user) do |f| %>
+		<%= render 'shared/error_messages', :object => f.object %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
 
-      <%= f.label :username %>
-      <%= f.text_field :username %>
+		<%= f.label :username %>
+		<%= f.text_field :username %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email %>
+		<%= f.label :email %>
+		<%= f.email_field :email %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+		<%= f.label :password %>
+		<%= f.password_field :password %>
 
-      <%= f.label :password_confirmation, "Confirm Password" %>
-      <%= f.password_field :password_confirmation %>
+		<%= f.label :password_confirmation, "Confirm Password" %>
+		<%= f.password_field :password_confirmation %>
 
-	  <%= f.label :profile, "Profile" %>
-	  <%= f.text_area :profile, :cols => "10", :rows => "8" %>
-	  <div class="well">
-	  <%= f.check_box :show_username, :class => "checkbox" %>	
-	  <%= f.label :show_username, "Show username on feed instead of real name" , :style => "display:inline" %>
-	  </div>
-	  <br />
+		<%= f.label :profile, "Profile" %>
+		<%= f.text_area :profile, :cols => "10", :rows => "8" %>
+		<div class="well">
+			<%= f.check_box :show_username, :class => "checkbox" %>	
+			<%= f.label :show_username, "Show username on feed instead of real name" , :style => "display:inline" %>
+		</div>
+		<br />
 	
-      <%= f.submit "Save changes", :class => "btn btn-large btn-primary" %>
-    <% end %>
-	<br />
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails">change</a>
-  </div>
+		<%= f.submit "Save changes", :class => "btn btn-large btn-primary" %>
+		<% end %>
+		<br />
+		<%= gravatar_for @user %>
+		<a href="http://gravatar.com/emails">change</a>
+	</div>
 </div>
