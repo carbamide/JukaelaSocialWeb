@@ -1,35 +1,35 @@
 class RelationshipsController < ApplicationController
-    before_filter :authenticate
+  before_filter :authenticate
     
-    def create
-        @user = User.find(params[:relationship][:followed_id])
+  def create
+    @user = User.find(params[:relationship][:followed_id])
         
-        current_user.follow!(@user)
+    current_user.follow!(@user)
         
-        if @user.send_email
-            UserMailer.following_email(@user, current_user).deliver
-        end
-        respond_to do |format|
-            format.html { redirect_to @user }
-            format.js
-            format.json { render :json => @user.to_json }
-        end
+    if @user.send_email
+      UserMailer.following_email(@user, current_user).deliver
     end
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
+      format.json { render :json => @user.to_json }
+    end
+  end
     
-    def destroy
-        @user = Relationship.find(params[:id]).followed
-        current_user.unfollow!(@user)
-        respond_to do |format|
-            format.html { redirect_to @user }
-            format.js
-            format.json
-        end
+  def destroy
+    @user = Relationship.find(params[:id]).followed
+    current_user.unfollow!(@user)
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
+      format.json
     end
+  end
     
-    def index
-        respond_to do |format|
-            format.json { render :json => @user.following.all }
-        end
+  def index
+    respond_to do |format|
+      format.json { render :json => @user.following.all }
     end
+  end
     
 end

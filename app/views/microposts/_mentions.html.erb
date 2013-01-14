@@ -1,33 +1,31 @@
 <li>
-  <span class="content"><%= auto_link(mention.content) %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(mention.created_at) %> ago.
-  </span>
-  <% if current_user?(mention.user) %>
+	<span class="content"><%= auto_link(mention.content) %></span>
+	<span class="timestamp">
+		Posted <%= time_ago_in_words(mention.created_at) %> ago.
+	</span>
+	<% if current_user?(mention.user) %>
 	<div class="btn-group">
-	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-	    <i class="icon-cog"></i>
-	    <span class="caret"></span>
-	  </a>
+		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			<i class="icon-cog"></i>
+			<span class="caret"></span>
+		</a>
 		<ul class="dropdown-menu">
 			<a href=<%= "#" + unique_modal(mention.id, "Delete") %> data-toggle="modal">Delete</a>
-  		</ul>
+		</ul>
 	</div>
 	<% end %>
 	
 	<div class="modal fade" id=<%= unique_modal(mention.id, "Delete") %>>
-	  <div class="modal-header">
-	    <a class="close" data-dismiss="modal">&times;</a>
-	    <h3>Delete?</h3>
-	  </div>
-	  <div class="modal-body">
-	    <p>Delete this post?</p>
-	  </div>
-	  <div class="modal-footer">
-	    <a href="#" class="btn" data-dismiss="modal">Close</a>
-	    <%= link_to "Delete", mention, :class => "btn btn-danger",
-								         :method =>  :delete,
-	                             		 :title =>   mention.content %>
-	  </div>
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal">&times;</a>
+			<h3>Delete?</h3>
+		</div>
+		<div class="modal-body">
+			<p>Delete this post?</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<%= link_to "Delete", mention, :class => "btn btn-danger", :method =>  :delete, :title =>   mention.content %>
+		</div>
 	</div>
 </li>

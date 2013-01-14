@@ -1,54 +1,53 @@
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= gravatar_for current_user %>
-        <%= current_user.name %>
-      </h1>
-	  <h4>
-		<% if current_user.username %>
-		<%= current_user.username %>
-		<% else %>
-		<script type="text/javascript">
-		    $(window).load(function(){
-		        $('#no_user_name').modal('show');
-		    });
-		</script>
+	<aside class="span4">
+		<section>
+			<h1>
+				<%= gravatar_for current_user %>
+				<%= current_user.name %>
+			</h1>
+			<h4>
+				<% if current_user.username %>
+				<%= current_user.username %>
+				<% else %>
+				<script type="text/javascript">
+					$(window).load(function(){
+						$('#no_user_name').modal('show');
+					});
+				</script>
+				<% end %>
+			</h4>
+		</section>
+		<section>
+			<% if current_user.profile %>
+			<%= auto_link(current_user.profile) %>
+			<% else %>
+			<div>User hasn't defined a profile.</div>
+			<% end %>
+		</section>
+		<section>
+			<%= render 'shared/stats' %>
+		</section>
+	</aside>
+	<div class="span8">
+		<% if current_user.mentions.any? %>
+		<h3>Mentions (<%= current_user.mentions.count %>)</h3>
+		<ol class="microposts">
+			<%= render 'shared/mentions' %>
+		</ol>
+		<%= will_paginate @mentions %>
 		<% end %>
-	  </h4>
-    </section>
-    <section>
-	  <% if current_user.profile %>
-      	<%= auto_link(current_user.profile) %>
-	  <% else %>
-		<div>User hasn't defined a profile.</div>
-	  <% end %>
-    </section>
-    <section>
-      <%= render 'shared/stats' %>
-    </section>
-  </aside>
-  <div class="span8">
-    <% if current_user.mentions.any? %>
-      <h3>Mentions (<%= current_user.mentions.count %>)</h3>
-      <ol class="microposts">
-	    <%= render 'shared/mentions' %>
-      </ol>
-      <%= will_paginate @mentions %>
-    <% end %>
-  </div>
+	</div>
 </div>
 </div>
 
 <div class="modal fade" id="no_user_name" %>
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">&times;</a>
-    <h3>Specify User Name</h3>
-  </div>
-  <div class="modal-body">
-    <p>Jukaela Social now has usernames!  Holy cow!  You will now be redirected to your Profile page to specify one.</p>
-  </div>
-  <div class="modal-footer">
-    <%= link_to "Update", edit_user_path(current_user), :class => "btn btn-primary" %>
-  </div>
+<div class="modal-header">
+	<a class="close" data-dismiss="modal">&times;</a>
+	<h3>Specify User Name</h3>
+</div>
+<div class="modal-body">
+	<p>Jukaela Social now has usernames!  Holy cow!  You will now be redirected to your Profile page to specify one.</p>
+</div>
+<div class="modal-footer">
+	<%= link_to "Update", edit_user_path(current_user), :class => "btn btn-primary" %>
 </div>

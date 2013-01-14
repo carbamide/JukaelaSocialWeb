@@ -1,23 +1,23 @@
 <li id="<%= mentions_item.id %>">
 
-  <% @another_temp = find_user_from_mention(mentions_item.sender_user_id) %>
+	<% @another_temp = find_user_from_mention(mentions_item.sender_user_id) %>
 
-  <%= link_to gravatar_for(@another_temp), @another_temp %>	
+	<%= link_to gravatar_for(@another_temp), @another_temp %>	
 
-  <span class="user">
-	<% if current_user.show_username == true %>
+	<span class="user">
+		<% if current_user.show_username == true %>
 			<% if @another_temp.username %>
 				<%= link_to @another_temp.username, @another_temp %>
 			<% else %>
 				<%= link_to @another_temp.name, @another_temp %>
-		    <% end %>
-	<% else %>
-    	<%= link_to @another_temp.name, @another_temp %>
-	<% end %>
-  </span>
-  <span class="content"><%= auto_link(mentions_item.content) %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(mentions_item.created_at) %> ago.
-  </span>	
+			<% end %>
+		<% else %>
+			<%= link_to @another_temp.name, @another_temp %>
+		<% end %>
+	</span>
+	<span class="content"><%= auto_link(mentions_item.content) %></span>
+	<span class="timestamp">
+		Posted <%= time_ago_in_words(mentions_item.created_at) %> ago.
+	</span>	
 </li>
 

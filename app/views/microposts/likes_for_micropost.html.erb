@@ -1,5 +1,5 @@
 <% if @micropost.like_users.any? %>
 <ol class="users">
-<%= render :partial => 'shared/like_user', :collection => @micropost.like_users %>
+	<%= render :partial => 'shared/like_user', :collection => @micropost.like_users %>
 </ol>
 <% end %>

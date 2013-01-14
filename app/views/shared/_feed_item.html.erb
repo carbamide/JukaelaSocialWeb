@@ -1,23 +1,21 @@
 <li id="<%= feed_item.id %>">
-
 	<%= link_to gravatar_for(feed_item.user), feed_item.user %>	
-
 	<span class="user">
 		<% if current_user.show_username == true %>
-		<% if feed_item.user.username %>
-		<%= link_to feed_item.user.username, feed_item.user %>
+			<% if feed_item.user.username %>
+				<%= link_to feed_item.user.username, feed_item.user %>
+			<% else %>
+				<%= link_to feed_item.user.name, feed_item.user %>
+			<% end %>
 		<% else %>
-		<%= link_to feed_item.user.name, feed_item.user %>
-		<% end %>
-		<% else %>
-		<%= link_to feed_item.user.name, feed_item.user %>
+			<%= link_to feed_item.user.name, feed_item.user %>
 		<% end %>
 	</span>
 	<span class="content">
 		<% if feed_item.image_url %>
-		<%= auto_link(feed_item.content + " " + feed_item.image_url) %>
+			<%= auto_link(feed_item.content + " " + feed_item.image_url) %>
 		<% else %>
-		<%= auto_link(feed_item.content) %>
+			<%= auto_link(feed_item.content) %>
 		<% end %>
 	</span>
 	<span class="timestamp">
@@ -30,16 +28,16 @@
 		</a>
 		<ul class="dropdown-menu">
 			<% if current_user?(feed_item.user) %>
-			<a href=<%= "#" + unique_modal(feed_item.id, "Delete") %> data-toggle="modal">Delete</a>
+				<a href=<%= "#" + unique_modal(feed_item.id, "Delete") %> data-toggle="modal">Delete</a>
 			<% else %>
-			<a href=<%= "#" + unique_modal(feed_item.id, "Reply") %> data-toggle="modal">Reply</a>
-			<%= link_to "Like", like_micropost_path(feed_item.id) %>
+				<a href=<%= "#" + unique_modal(feed_item.id, "Reply") %> data-toggle="modal">Reply</a>
+				<%= link_to "Like", like_micropost_path(feed_item.id) %>
 			<% end %>
 			<% if feed_item.in_reply_to %>
-			<%= link_to "Show thread", micropost_path(feed_item.in_reply_to) %><br />
+				<%= link_to "Show thread", micropost_path(feed_item.in_reply_to) %><br />
 			<% end %>
 			<% if feed_item.like_users.count > 0 %>
-			<%= link_to "Show Likes", likes_for_micropost_micropost_path(feed_item) %>
+				<%= link_to "Show Likes", likes_for_micropost_micropost_path(feed_item) %>
 			<% end %>
 		</ul>
 	</div>	
@@ -54,9 +52,7 @@
 		</div>
 		<div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
-			<%= link_to "Delete", feed_item, :class => "btn btn-danger",
-			:method =>  :delete,
-			:title =>   feed_item.content %>
+			<%= link_to "Delete", feed_item, :class => "btn btn-danger", :method =>  :delete, :title =>   feed_item.content %>
 		</div>
 	</div>
 

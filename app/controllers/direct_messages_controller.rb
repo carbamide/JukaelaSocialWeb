@@ -4,7 +4,9 @@ class DirectMessagesController < ApplicationController
     
   def index
     respond_to do |format|
-      format.json  { render :json => current_user.direct_messages.all }
+      format.json  { 
+        render :json => current_user.direct_messages.all 
+      }
     end
   end
     
