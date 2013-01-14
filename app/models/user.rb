@@ -14,6 +14,9 @@ require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
   
+  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  username_regex = /^[a-z0-9\-_]+$/i
+  
   attr_accessible :name, :email, :password, :password_confirmation, :profile, :username, :show_username, :apns, :send_email, :apids
     
   has_many :microposts, :dependent => :destroy
@@ -34,8 +37,7 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password
     
-  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  username_regex = /^[a-z0-9\-_]+$/i
+
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

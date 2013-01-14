@@ -32,154 +32,154 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-end
   
-def edit
-  @title = "Edit user"
-end
+  def edit
+    @title = "Edit user"
+  end
     
-def update
-  @user = User.find(params[:id])
-  if @user.update_attributes(params[:user])
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
             
+      respond_to do |format|
+        format.html {
+          flash[:success] = "Profile updated."
+          redirect_to @user 
+        }
+        format.json {
+          render :json => @user 
+        }
+      end
+    else
+      @title = "Edit user"
+      render 'edit'
+    end
+  end
+    
+  def index
+    @title = "All users"
+    @users = User.paginate(:page => params[:page])
+        
     respond_to do |format|
-      format.html {
-        flash[:success] = "Profile updated."
-        redirect_to @user 
+      format.html # index.html.erb
+      format.json  { render :json => User.all.sort_by(&:name) }
+    end
+  end
+    
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(:page => params[:page])
+    @mentions = @user.mentions.paginate(:page => params[:page])
+    @title = @user.name
+        
+    respond_to do |format|
+      format.html
+      format.json  { 
+        render :json => @user 
       }
+    end
+  end
+    
+  def user_from_username
+    @user = User.find_by_username(params[:username])
+        
+    respond_to do |format|
       format.json {
         render :json => @user 
       }
     end
-  else
-    @title = "Edit user"
-    render 'edit'
   end
-end
     
-def index
-  @title = "All users"
-  @users = User.paginate(:page => params[:page])
-        
-  respond_to do |format|
-    format.html # index.html.erb
-    format.json  { render :json => User.all.sort_by(&:name) }
-  end
-end
-    
-def show
-  @user = User.find(params[:id])
-  @microposts = @user.microposts.paginate(:page => params[:page])
-  @mentions = @user.mentions.paginate(:page => params[:page])
-  @title = @user.name
-        
-  respond_to do |format|
-    format.html
-    format.json  { 
-      render :json => @user 
-    }
-  end
-end
-    
-def user_from_username
-  @user = User.find_by_username(params[:username])
-        
-  respond_to do |format|
-    format.json {
-      render :json => @user 
-    }
-  end
-end
-    
-def show_microposts_for_user
-  @user = User.find(params[:id])        
-  @microposts  = @user.microposts.slice!(params[:first].to_i, params[:last].to_i)
+  def show_microposts_for_user
+    @user = User.find(params[:id])        
+    @microposts  = @user.microposts.slice!(params[:first].to_i, params[:last].to_i)
 
-  respond_to do |format|
-    format.json {
-      render :json => @microposts 
-    }
+    respond_to do |format|
+      format.json {
+        render :json => @microposts 
+      }
+    end
   end
-end
     
-def number_of_posts
-  @user = User.find(params[:id])
-  @microposts = @user.microposts.all
+  def number_of_posts
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.all
         
-  respond_to do |format|
-    format.json {
-      render :json => {:count => @microposts.count}
-    }
+    respond_to do |format|
+      format.json {
+        render :json => {:count => @microposts.count}
+      }
+    end
   end
-end
     
-def number_of_following
-  @user = User.find(params[:id])
-  @following = @user.following.all
+  def number_of_following
+    @user = User.find(params[:id])
+    @following = @user.following.all
         
-  respond_to do |format|
-    format.json {
-      render :json => {:count => @following.count}
-    }
+    respond_to do |format|
+      format.json {
+        render :json => {:count => @following.count}
+      }
+    end
   end
-end
     
-def number_of_followers
-  @user = User.find(params[:id])
-  @followers = @user.followers.all
+  def number_of_followers
+    @user = User.find(params[:id])
+    @followers = @user.followers.all
         
-  respond_to do |format|
-    format.json {
-      render :json => {:count => @followers.count}
-    }
+    respond_to do |format|
+      format.json {
+        render :json => {:count => @followers.count}
+      }
+    end
   end
-end
     
-def destroy
-  User.find(params[:id]).destroy
+  def destroy
+    User.find(params[:id]).destroy
   
-  flash[:success] = "User destroyed."
+    flash[:success] = "User destroyed."
   
-  redirect_to users_path
-end
-    
-def following
-  @title = "Following"
-  @user = User.find(params[:id])
-  @users = @user.following.paginate(:page => params[:page])
-        
-  respond_to do |format|
-    format.html { 
-      render 'show_follow' 
-    }
-    format.json {
-      render :json => {:user => @user.following.all, :relationships => @user.relationships}
-    }
+    redirect_to users_path
   end
-end
     
-def followers
-  @title = "Followers"
-  @user = User.find(params[:id])
-  @users = @user.followers.paginate(:page => params[:page])
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(:page => params[:page])
         
-  respond_to do |format|
-    format.html {
-      render 'show_follow' 
-    }
-    format.json {
-      render :json => @user.followers.all 
-    }
+    respond_to do |format|
+      format.html { 
+        render 'show_follow' 
+      }
+      format.json {
+        render :json => {:user => @user.following.all, :relationships => @user.relationships}
+      }
+    end
   end
-end
     
-private
-def correct_user
-  @user = User.find(params[:id])
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(:page => params[:page])
+        
+    respond_to do |format|
+      format.html {
+        render 'show_follow' 
+      }
+      format.json {
+        render :json => @user.followers.all 
+      }
+    end
+  end
+    
+  private
+  def correct_user
+    @user = User.find(params[:id])
   
-  redirect_to(root_path) unless current_user?(@user)
-end
+    redirect_to(root_path) unless current_user?(@user)
+  end
     
-def admin_user
-  redirect_to(root_path) unless current_user.admin
+  def admin_user
+    redirect_to(root_path) unless current_user.admin
+  end
 end

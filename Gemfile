@@ -13,10 +13,6 @@ gem 'rails_autolink'
 gem 'thin'
 gem 'rapns'
 gem 'urbanairship'
-gem 'paperclip'
-gem 'aws-sdk'
-gem 'aws-s3'
-gem 'newrelic_rpm'
 gem 'imgur'
 
 group :production do
