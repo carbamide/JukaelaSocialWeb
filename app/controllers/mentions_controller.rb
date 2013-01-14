@@ -4,13 +4,14 @@ class MentionsController < ApplicationController
     
   def index
     respond_to do |format|
-      format.json  { render :json => current_user.mentions.all }
+      format.json  { 
+        render :json => current_user.mentions.all 
+      }
     end
   end
     
   def create
     @mention = current_user.mentions.build(params[:micropost])
-        
     @micropost = current_user.microposts.build(params[:micropost])
         
     if @mention.save
