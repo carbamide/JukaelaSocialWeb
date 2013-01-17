@@ -293,7 +293,7 @@ def images_from_feed
         
       return_hash["imageFilename"] = m.image_url
       return_hash["size"] = (0..2).to_a.sample
-      return_hash["title"] = m.content
+      return_hash["title"] = m.content.split[0..1].join(" ")
           
       images.push(return_hash)
     end
