@@ -321,10 +321,7 @@ def random_image
     end
   end
 
-  r = Random.new
-  r.rand(1...images.count)
-
-  image_data = images.at(r.to_i)
+  image_data = imgaes.sample
 
   respond_to do |format|
     format.json {
