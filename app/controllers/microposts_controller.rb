@@ -309,8 +309,17 @@ def images_from_feed
 end
    
 def random_image
+  images = Array.new
 
-  images = images_from_feed
+  Micropost.all.each do |m|
+    if m.image_url
+      return_hash = Hash.new
+
+      return_hash["image_url"] = m.image_url
+
+      image.push(return_hash)
+    end
+  end
 
   r = Random.new
   r.rand(1...images.count)
