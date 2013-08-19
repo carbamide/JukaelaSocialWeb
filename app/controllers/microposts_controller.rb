@@ -324,7 +324,7 @@ def random_image
   r = Random.new
   r.rand(1...images.count)
 
-  image_data = images.at(r)
+  image_data = images.at(r.to_i)
 
   respond_to do |format|
     format.json {
