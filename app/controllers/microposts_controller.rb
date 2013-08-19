@@ -317,7 +317,7 @@ def random_image
 
       return_hash["image_url"] = m.image_url
 
-      image.push(return_hash)
+      images.push(return_hash)
     end
   end
 
