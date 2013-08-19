@@ -307,7 +307,23 @@ def images_from_feed
     }
   end
 end
-    
+   
+def random_image
+
+  images = images_from_feed
+
+  r = Random.new
+  r.rand(1...images.count)
+
+  image_data = images.at(r)
+
+  respond_to do |format|
+    format.json {
+      render :json => image_data
+    }
+  end
+end
+
 private
   def authorized_user
     @micropost = current_user.microposts.find_by_id(params[:id])
