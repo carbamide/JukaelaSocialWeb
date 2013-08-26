@@ -24,7 +24,7 @@ class UsersController < ApplicationController
           render :json => @user 
         }
       end
-      if !user.send_email
+      if !@user.send_email
         UserMailer.welcome_email(@user).deliver
       end
     else
