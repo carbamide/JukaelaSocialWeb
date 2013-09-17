@@ -61,7 +61,9 @@ class SessionsController < ApplicationController
       format.json  {
         sign_in user
 
-        render :json => user.except(:salt, :encrypted_password).to_json
+        user.salt = ""
+        user.encrypted_password = ""
+        render :json => user.to_json
       }
     end
         
